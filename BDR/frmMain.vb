@@ -1,0 +1,238 @@
+﻿Public Class frmMain
+
+    Public BatchID As Long
+    Public Period As Long
+
+    Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Try
+            UspBatchListTableAdapter.Connection.ConnectionString = My.Settings.BPESCnString
+            UspBatchListTableAdapter.Fill(BPESDataSet.uspBatchList)
+            qryTagTableTableAdapter.Connection.ConnectionString = My.Settings.BPESCnString
+            qryTagTableTableAdapter.Fill(BPESDataSet.qryTagTable)
+        Catch ex As Exception
+            MsgBox("Could not connect to Data - Check Connection", vbCritical, "ERROR GETTING BATCH INFORMATION")
+            grdBatchSelection.AllowResizeToFit = False
+        End Try
+        grdBatchSelection.Model.ColWidths(1) = 125
+        grdBatchSelection.Model.ColWidths(2) = 262
+        grdBatchSelection.Model.ColWidths(3) = 125
+        grdBatchSelection.Model.ColWidths(4) = 125
+        grdBatchSelection.Model.ColWidths(5) = 85
+        grdBatchSelection.Top = 10
+        grdBatchSelection.Left = 474
+        grdBatchSelection.Width = 780
+        grdBatchSelection.Height = 232
+        Width = 1280
+        Height = 250
+        Left = 0
+        Top = 640
+        ShowActiveConfig()
+    End Sub
+
+    Private Sub ShowActiveConfig()
+        Dim dt As BPESDataSetTableAdapters.BatchReportConfigTableAdapter = New BPESDataSetTableAdapters.BatchReportConfigTableAdapter
+        dt.Connection.ConnectionString = My.Settings.BPESCnString
+        Dim dr() As DataRow = dt.GetReportConfig().Select("ActiveConfig = 1")
+        txtActiveConfig.Text = dr(0)("BRCDescription")
+    End Sub
+
+    Private Function GetTagIndex(sTag As String) As Long
+        Dim nIndex As Long = 0
+        Dim nCounter As Long = 0
+        Dim dt As DataTable = qryTagTableTableAdapter.GetData()
+
+        For nCounter = 0 To dt.Rows.Count - 1
+            If dt.Rows(nCounter)("TagName").ToString() = sTag Then nIndex = nCounter
+        Next nCounter
+        GetTagIndex = nIndex
+    End Function
+
+    Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+        End
+    End Sub
+
+    Private Sub grdBatchSelection_CellClick(sender As Object, e As Syncfusion.Windows.Forms.Grid.GridCellClickEventArgs) Handles grdBatchSelection.CellClick
+        MoveGridToTextBoxes()
+    End Sub
+
+    Public Sub MoveGridToTextBoxes()
+        If grdBatchSelection.Model.SelectedRanges.Count > 0 Then
+            ' txtStartTime.Text = Format(grdBatchSelection(grdBatchSelection.Model.SelectedRanges(0).Top, 3).CellValue, "M/dd/yy HH:mm:ss")
+            'txtEndTime.Text = Format(grdBatchSelection(grdBatchSelection.Model.SelectedRanges(0).Top, 4).CellValue, "M/dd/yy HH:mm:ss")
+            txtStartTime.Text = grdBatchSelection(grdBatchSelection.Model.SelectedRanges(0).Top, 3).CellValue
+            txtEndTime.Text = grdBatchSelection(grdBatchSelection.Model.SelectedRanges(0).Top, 4).CellValue
+            txtBatchID.Text = grdBatchSelection(grdBatchSelection.Model.SelectedRanges(0).Top, 1).Text
+            btnBatchRpt.Enabled = True
+        Else
+            MsgBox("No Batch Selected", vbCritical)
+        End If
+    End Sub
+
+    Public Sub CustomTimes()
+        txtBatchID.Text = "Custom Dates"
+        btnBatchRpt.Enabled = False
+    End Sub
+
+    Private Sub txtStartTime_TextChanged(sender As Object, e As EventArgs) Handles txtStartTime.TextChanged
+        CustomTimes()
+    End Sub
+
+    Private Sub txtEndTime_TextChanged(sender As Object, e As EventArgs) Handles txtEndTime.TextChanged
+        CustomTimes()
+    End Sub
+
+    Private Sub btnEventReport_Click(sender As Object, e As EventArgs) Handles btnEventReport.Click
+        ShowEventReport
+    End Sub
+
+    Public Sub ShowEventReport()
+        Dim params(4) As Microsoft.Reporting.WinForms.ReportParameter
+        If Not (IsDate(txtStartTime.Text) And IsDate(txtEndTime.Text)) Then
+            MsgBox("Invalid Dates")
+            Exit Sub
+        End If
+        glReportType = 1
+        gdStartTime = Date.Parse(txtStartTime.Text)
+        gdEndTime = Date.Parse(txtEndTime.Text)
+
+        Cursor = Cursors.WaitCursor
+        Try
+            params(0) = New Microsoft.Reporting.WinForms.ReportParameter("StartTime", txtStartTime.Text)
+            params(1) = New Microsoft.Reporting.WinForms.ReportParameter("EndTime", txtEndTime.Text)
+            params(2) = New Microsoft.Reporting.WinForms.ReportParameter("BatchID", txtBatchID.Text)
+            params(3) = New Microsoft.Reporting.WinForms.ReportParameter("ShowEvents", chkEvents.Checked)
+            params(4) = New Microsoft.Reporting.WinForms.ReportParameter("ShowAlarms", chkAlarms.Checked)
+            frmReport.Show()
+            frmReport.TopMost = True
+            frmReport.rvEvents.LocalReport.SetParameters(params)
+            frmReport.rvEvents.RefreshReport()
+        Catch
+            Cursor = Cursors.Default
+            MsgBox("Cannot process that timespan, try increasing period or decreasing time span")
+        End Try
+        Cursor = Cursors.Default
+        Me.Visible = False
+    End Sub
+
+    Private Sub btnData_Click(sender As Object, e As EventArgs) Handles btnData.Click
+        Dim dtStart As Date
+        Dim dtEnd As Date
+        Dim pth As String = My.Computer.FileSystem.SpecialDirectories.Temp
+        Dim sFilename As String
+        Dim nCounter As Integer
+        Dim sLine As String = ""
+        Dim dc As DataColumn
+        Dim sSPName As String = ""
+
+        If optInterpolated.Checked Then
+            sSPName = "uspInterpolatedAnalogData"
+        Else
+            sSPName = "uspAnalogData"
+        End If
+        sFilename = Replace(Replace(Replace(txtBatchID.Text, " ", ""), "/", ""), ":", "") & ".txt"
+        If Not (IsDate(txtStartTime.Text) And IsDate(txtEndTime.Text)) Then
+            MsgBox("Invalid Dates")
+            Exit Sub
+        End If
+        dtStart = Date.Parse(txtStartTime.Text)
+        dtEnd = Date.Parse(txtEndTime.Text)
+        Cursor = Cursors.WaitCursor
+        Try
+            Using cn = GetConnection()
+                Dim cmd As System.Data.SqlClient.SqlCommand = New System.Data.SqlClient.SqlCommand(sSPName, cn)
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandTimeout = 120
+                cmd.Parameters.AddWithValue("@Start", dtStart)
+                cmd.Parameters.AddWithValue("@End", dtEnd)
+                If optInterpolated.Checked Then cmd.Parameters.AddWithValue("@Period", txtPeriod.Text)
+                Using r = cmd.ExecuteReader()
+                    If r.HasRows Then
+                        Using outputFile As New System.IO.StreamWriter(pth & "\" & sFilename)
+                            Dim dt As New DataTable
+                            dt.Load(r)
+                            For nCounter = 0 To dt.Columns.Count - 1
+                                sLine = sLine & "#" & (dt.Columns(nCounter).ColumnName)
+                            Next nCounter
+                            outputFile.WriteLine(Replace(Mid(sLine, 2), "#", vbTab))
+                            For Each dtr In dt.Rows
+                                sLine = ""
+                                For Each dc In dt.Columns
+                                    sLine = sLine & "#" & (dtr(dc))
+                                Next
+                                outputFile.WriteLine(Replace(Mid(sLine, 2), "#", vbTab))
+                            Next
+                            outputFile.Close()
+                        End Using
+                        If System.IO.File.Exists(pth & "\" & sFilename) = True Then
+                            Process.Start(pth & "\" & sFilename)
+                        Else
+                            Cursor = Cursors.Default
+                            MsgBox("File Does Not Exist")
+                        End If
+                    Else
+                        Cursor = Cursors.Default
+                        MsgBox("No data returned for those parameters", MsgBoxStyle.Critical, "OPERATION FAILED")
+                        Exit Sub
+                    End If
+                End Using
+            End Using
+        Catch
+            Cursor = Cursors.Default
+            MsgBox("Cannot process that timespan, try increasing period or decreasing time span")
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub btnTools_Click(sender As Object, e As EventArgs) Handles btnTools.Click
+        frmSettings.ShowDialog()
+    End Sub
+
+    Private Sub btnBatchRpt_Click(sender As Object, e As EventArgs) Handles btnBatchRpt.Click
+        ShowBatchReport()
+    End Sub
+
+    Public Sub ShowBatchReport(Optional bRemote As Boolean = False)
+
+        Dim params(3) As Microsoft.Reporting.WinForms.ReportParameter
+
+        If Not bRemote Then
+            If Not (IsDate(txtStartTime.Text) And IsDate(txtEndTime.Text)) Then
+                MsgBox("Invalid Dates")
+                Exit Sub
+            End If
+        End If
+        glReportType = 2
+        gdStartTime = Date.Parse(txtStartTime.Text)
+        gdEndTime = Date.Parse(txtEndTime.Text)
+
+        Cursor = Cursors.WaitCursor
+        Try
+            Period = txtPeriod.Text
+            BatchID = grdBatchSelection(grdBatchSelection.Model.SelectedRanges(0).Top, 6).Text
+            params(0) = New Microsoft.Reporting.WinForms.ReportParameter("StartTime", txtStartTime.Text)
+            params(1) = New Microsoft.Reporting.WinForms.ReportParameter("EndTime", txtEndTime.Text)
+            params(2) = New Microsoft.Reporting.WinForms.ReportParameter("BatchID", txtBatchID.Text)
+            params(3) = New Microsoft.Reporting.WinForms.ReportParameter("BatchDesc", grdBatchSelection(grdBatchSelection.Model.SelectedRanges(0).Top, 2).Text)
+            frmReport.Show()
+            frmReport.TopMost = True
+            frmReport.rvEvents.LocalReport.SetParameters(params)
+            frmReport.rvEvents.RefreshReport()
+        Catch
+            Cursor = Cursors.Default
+            MsgBox("Unknown error generating report", vbCritical, "RESTART BDR AND TRY AGAIN")
+            Exit Sub
+        End Try
+        Cursor = Cursors.Default
+        Me.Visible = False
+    End Sub
+
+    Private Sub cmdReportConfig_Click(sender As Object, e As EventArgs) Handles cmdReportConfig.Click
+        frmReportConfig.ShowDialog()
+        ShowActiveConfig()
+    End Sub
+
+    Private Sub optInterpolated_CheckedChanged(sender As Object, e As EventArgs) Handles optInterpolated.CheckedChanged
+        lblPeriod.Enabled = optInterpolated.Checked
+        txtPeriod.Enabled = optInterpolated.Checked
+    End Sub
+End Class
