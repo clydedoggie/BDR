@@ -478,7 +478,6 @@
                           <BackgroundGradientType>None</BackgroundGradientType>
                         </Style>
                       </Chart>
-                      <rd:Selected>true</rd:Selected>
                     </CellContents>
                   </TablixHeader>
                   <TablixMembers>

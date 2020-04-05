@@ -60,7 +60,7 @@ Module mdlMain
         Loop
     End Sub
 
-    Public Sub SaveReportToPDF(ByVal rpt As LocalReport, ByVal savePath As String)
+    Public Sub SaveReportToPDF(ByVal rpt As Microsoft.Reporting.WinForms.LocalReport, ByVal savePath As String)
         Dim Bytes() As Byte = rpt.Render("PDF", "", Nothing, Nothing, Nothing, Nothing, Nothing)
 
         Using Stream As New FileStream(savePath, FileMode.Create)

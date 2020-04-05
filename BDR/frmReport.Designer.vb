@@ -40,7 +40,7 @@ Partial Class frmReport
         '
         'vwConditionEventBindingSource
         '
-        Me.vwConditionEventBindingSource.DataMember = "vwConditionEvent"
+        Me.vwConditionEventBindingSource.DataMember = "vwEventsWithPhAndRec"
         Me.vwConditionEventBindingSource.DataSource = Me.BPESDataSet
         '
         'BPESDataSet
@@ -57,7 +57,8 @@ Partial Class frmReport
         Me.rvEvents.LocalReport.ReportEmbeddedResource = "BDR.rptMain.rdlc"
         Me.rvEvents.Location = New System.Drawing.Point(47, 52)
         Me.rvEvents.Name = "rvEvents"
-        Me.rvEvents.Size = New System.Drawing.Size(941, 512)
+        Me.rvEvents.ServerReport.BearerToken = Nothing
+        Me.rvEvents.Size = New System.Drawing.Size(941, 536)
         Me.rvEvents.TabIndex = 0
         '
         'vwConditionEventTableAdapter
