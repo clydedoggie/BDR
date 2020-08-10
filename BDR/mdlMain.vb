@@ -12,7 +12,6 @@ Module mdlMain
         Dim dDateAndTime As DateTime = Now()
 
         If My.Settings.AutoReportOn Then
-            '          If colStartupArgs.Count > 0 Then
             If Len(sStartupArgs) > 0 Then
                 Dim sWaitSec As String = sStartupArgs
                 If Left(sWaitSec, 1) = "\" Then sWaitSec = Mid(sWaitSec, 2, 10)
@@ -23,15 +22,19 @@ Module mdlMain
                 End If
                 bBatchReport = (nWaitSec >= 0)
                 frmMain.Visible = True
-                If nWaitSec > 0 Then ProgramPause(nWaitSec)
+                If nWaitSec > 0 Then
+                    frmMain.btnExit.Enabled = False
+                    ProgramPause(nWaitSec)
+                End If
                 If bBatchReport Then
                     frmMain.grdBatchSelection.Refresh()
                     frmMain.grdBatchSelection.Model.Selections.Clear()
                     frmMain.grdBatchSelection.Model.Selections.Add(Syncfusion.Windows.Forms.Grid.GridRangeInfo.Rows(1, 1))
                     frmMain.MoveGridToTextBoxes()
                     dDateAndTime = frmMain.txtBatchID.Text
-                    sFileName = My.Settings.BatchReportPath & "\Batch Report " & dDateAndTime.Day & "_" & dDateAndTime.Month & "_" & dDateAndTime.Year _
-                        & "_" & dDateAndTime.Hour & "_" & dDateAndTime.Minute & "_" & dDateAndTime.Second & ".pdf"
+                    'sFileName = My.Settings.BatchReportPath & "\Batch Report " & dDateAndTime.Day & "_" & dDateAndTime.Month & "_" & dDateAndTime.Year _
+                    '   & "_" & dDateAndTime.Hour & "_" & dDateAndTime.Minute & "_" & dDateAndTime.Second & ".pdf"
+                    sFileName = My.Settings.BatchReportPath & "\Batch Report " & Replace(Replace(dDateAndTime.ToString, "/", "-"), ":", ".") & ".pdf"
                     frmMain.ShowBatchReport()
                 Else
                     dDateAndTime = DateAdd(DateInterval.Day, -1, dDateAndTime)
