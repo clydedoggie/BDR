@@ -31,10 +31,8 @@ Module mdlMain
                     frmMain.grdBatchSelection.Model.Selections.Clear()
                     frmMain.grdBatchSelection.Model.Selections.Add(Syncfusion.Windows.Forms.Grid.GridRangeInfo.Rows(1, 1))
                     frmMain.MoveGridToTextBoxes()
-                    dDateAndTime = frmMain.txtBatchID.Text
-                    'sFileName = My.Settings.BatchReportPath & "\Batch Report " & dDateAndTime.Day & "_" & dDateAndTime.Month & "_" & dDateAndTime.Year _
-                    '   & "_" & dDateAndTime.Hour & "_" & dDateAndTime.Minute & "_" & dDateAndTime.Second & ".pdf"
-                    sFileName = My.Settings.BatchReportPath & "\Batch Report " & Replace(Replace(dDateAndTime.ToString, "/", "-"), ":", ".") & ".pdf"
+                    dDateAndTime = frmMain.txtStartTime.Text
+                    sFileName = My.Settings.BatchReportPath & "\Batch Report " & Format(dDateAndTime, "dd-MMM-yy HH.mm.ss") & ".pdf"
                     frmMain.ShowBatchReport()
                 Else
                     dDateAndTime = DateAdd(DateInterval.Day, -1, dDateAndTime)

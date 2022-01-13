@@ -15,7 +15,7 @@ Option Explicit On
 Namespace My
     
     <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.5.0.0"),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0"),  _
      Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
     Partial Friend NotInheritable Class MySettings
         Inherits Global.System.Configuration.ApplicationSettingsBase
@@ -92,7 +92,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=PRL-ENVY\PRL_SQL;Initial Catalog=BPES;Integrated Security=True;Connec"& _ 
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=PRL-ENVY\SQL2019;Initial Catalog=BPES;Integrated Security=True;Connec"& _ 
             "t Timeout=60")>  _
         Public Property BPESCnString() As String
             Get
@@ -106,7 +106,8 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=PRL-ENVY\PRL_SQL;Initial Catalog=BPES;Integrated Security=True")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=PRL-ENVY\SQL2019;Initial Catalog=BPES;Integrated Security=True;Connec"& _ 
+            "t Timeout=60")>  _
         Public ReadOnly Property BPESConnectionString() As String
             Get
                 Return CType(Me("BPESConnectionString"),String)

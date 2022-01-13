@@ -169,21 +169,21 @@
               <TablixHeader>
                 <Size>0.81944in</Size>
                 <CellContents>
-                  <Textbox Name="TagGroup">
+                  <Textbox Name="TagName1">
                     <CanGrow>true</CanGrow>
                     <KeepTogether>true</KeepTogether>
                     <Paragraphs>
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>=Fields!TagGroup.Value</Value>
+                            <Value>=Fields!TagName.Value</Value>
                             <Style />
                           </TextRun>
                         </TextRuns>
                         <Style />
                       </Paragraph>
                     </Paragraphs>
-                    <rd:DefaultName>TagGroup</rd:DefaultName>
+                    <rd:DefaultName>TagName1</rd:DefaultName>
                     <Style>
                       <Border>
                         <Color>LightGrey</Color>
@@ -248,7 +248,11 @@
                                   <ChartDataLabel>
                                     <Style />
                                   </ChartDataLabel>
-                                  <Style />
+                                  <Style>
+                                    <Border>
+                                      <Width>2pt</Width>
+                                    </Border>
+                                  </Style>
                                   <ChartMarker>
                                     <Style />
                                   </ChartMarker>
@@ -385,6 +389,7 @@
                                 <CrossAt>NaN</CrossAt>
                                 <Minimum>NaN</Minimum>
                                 <Maximum>NaN</Maximum>
+                                <IncludeZero>false</IncludeZero>
                                 <ChartAxisScaleBreak>
                                   <Style />
                                 </ChartAxisScaleBreak>
@@ -478,6 +483,7 @@
                           <BackgroundGradientType>None</BackgroundGradientType>
                         </Style>
                       </Chart>
+                      <rd:Selected>true</rd:Selected>
                     </CellContents>
                   </TablixHeader>
                   <TablixMembers>

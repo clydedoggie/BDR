@@ -12,9 +12,9 @@ Namespace My
         Public Sub Me_Startup(ByVal sender As Object, ByVal e As StartupEventArgs) Handles Me.Startup
             Dim sStartupArgs As String = ""
 #If DEBUG Then
-            sStartupArgs = "0"
+            If My.Application.CommandLineArgs.Count > 0 Then sStartupArgs = My.Application.CommandLineArgs(0)
 #Else
-          if my.application.commandlineargs.count>0 then  sstartupargs=my.application.commandlineargs(0)
+            If my.application.commandlineargs.count>0 then  sstartupargs=my.application.commandlineargs(0)
 #End If
             StartupBDR(sStartupArgs, True)
         End Sub

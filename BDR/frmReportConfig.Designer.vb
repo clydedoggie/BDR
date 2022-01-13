@@ -23,8 +23,8 @@ Partial Class frmReportConfig
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim GridColumnDescriptor1 As Syncfusion.Windows.Forms.Grid.Grouping.GridColumnDescriptor = New Syncfusion.Windows.Forms.Grid.Grouping.GridColumnDescriptor()
-        Dim GridColumnDescriptor2 As Syncfusion.Windows.Forms.Grid.Grouping.GridColumnDescriptor = New Syncfusion.Windows.Forms.Grid.Grouping.GridColumnDescriptor()
+        Dim GridColumnDescriptor3 As Syncfusion.Windows.Forms.Grid.Grouping.GridColumnDescriptor = New Syncfusion.Windows.Forms.Grid.Grouping.GridColumnDescriptor()
+        Dim GridColumnDescriptor4 As Syncfusion.Windows.Forms.Grid.Grouping.GridColumnDescriptor = New Syncfusion.Windows.Forms.Grid.Grouping.GridColumnDescriptor()
         Me.TblReportTagGroupsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.cboTags = New Syncfusion.Windows.Forms.Tools.ComboBoxAdv()
         Me.BPESDataSet = New BDR.BPESDataSet()
@@ -112,21 +112,21 @@ Partial Class frmReportConfig
         Me.grdRC.TableDescriptor.AllowEdit = False
         Me.grdRC.TableDescriptor.AllowNew = False
         Me.grdRC.TableDescriptor.AllowRemove = False
-        GridColumnDescriptor1.GroupByAppearance.ColumnHeaderCell.Enabled = False
-        GridColumnDescriptor1.GroupByAppearance.ColumnHeaderCell.Interior = New Syncfusion.Drawing.BrushInfo()
-        GridColumnDescriptor1.GroupByAppearance.ColumnHeaderCell.ReadOnly = True
-        GridColumnDescriptor1.GroupByOptions.CaptionText = " {Category} "
-        GridColumnDescriptor1.GroupByOptions.IsExpandedInitialValue = True
-        GridColumnDescriptor1.GroupByOptions.ShowSummaries = False
-        GridColumnDescriptor1.HeaderText = "Group"
-        GridColumnDescriptor1.MappingName = "BRCGroupName"
-        GridColumnDescriptor1.ReadOnly = True
-        GridColumnDescriptor2.AllowGroupByColumn = False
-        GridColumnDescriptor2.HeaderText = "Tags"
-        GridColumnDescriptor2.MappingName = "TagName"
-        GridColumnDescriptor2.ReadOnly = True
-        GridColumnDescriptor2.Width = 150
-        Me.grdRC.TableDescriptor.Columns.AddRange(New Syncfusion.Windows.Forms.Grid.Grouping.GridColumnDescriptor() {GridColumnDescriptor1, GridColumnDescriptor2})
+        GridColumnDescriptor3.GroupByAppearance.ColumnHeaderCell.Enabled = False
+        GridColumnDescriptor3.GroupByAppearance.ColumnHeaderCell.Interior = New Syncfusion.Drawing.BrushInfo()
+        GridColumnDescriptor3.GroupByAppearance.ColumnHeaderCell.ReadOnly = True
+        GridColumnDescriptor3.GroupByOptions.CaptionText = " {Category} "
+        GridColumnDescriptor3.GroupByOptions.IsExpandedInitialValue = True
+        GridColumnDescriptor3.GroupByOptions.ShowSummaries = False
+        GridColumnDescriptor3.HeaderText = "Group"
+        GridColumnDescriptor3.MappingName = "BRCGroupName"
+        GridColumnDescriptor3.ReadOnly = True
+        GridColumnDescriptor4.AllowGroupByColumn = False
+        GridColumnDescriptor4.HeaderText = "Tags"
+        GridColumnDescriptor4.MappingName = "TagName"
+        GridColumnDescriptor4.ReadOnly = True
+        GridColumnDescriptor4.Width = 150
+        Me.grdRC.TableDescriptor.Columns.AddRange(New Syncfusion.Windows.Forms.Grid.Grouping.GridColumnDescriptor() {GridColumnDescriptor3, GridColumnDescriptor4})
         Me.grdRC.TableDescriptor.GroupedColumns.AddRange(New Syncfusion.Grouping.SortColumnDescriptor() {New Syncfusion.Grouping.SortColumnDescriptor("BRCGroupName", System.ComponentModel.ListSortDirection.Ascending)})
         Me.grdRC.TableDescriptor.Name = "tblReportTagGroupsDescriptor"
         Me.grdRC.TableDescriptor.PrimaryKeyColumns.AddRange(New Syncfusion.Grouping.SortColumnDescriptor() {New Syncfusion.Grouping.SortColumnDescriptor("BRCGroupID", System.ComponentModel.ListSortDirection.Ascending), New Syncfusion.Grouping.SortColumnDescriptor("TagIndex", System.ComponentModel.ListSortDirection.Ascending)})
@@ -166,7 +166,6 @@ Partial Class frmReportConfig
         '
         Me.cmdAddTagToGroup.BeforeTouchSize = New System.Drawing.Size(94, 47)
         Me.cmdAddTagToGroup.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdAddTagToGroup.IsBackStageButton = False
         Me.cmdAddTagToGroup.Location = New System.Drawing.Point(178, 78)
         Me.cmdAddTagToGroup.Name = "cmdAddTagToGroup"
         Me.cmdAddTagToGroup.Size = New System.Drawing.Size(94, 47)
@@ -178,18 +177,16 @@ Partial Class frmReportConfig
         Me.txtNewGrp.BeforeTouchSize = New System.Drawing.Size(239, 20)
         Me.txtNewGrp.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtNewGrp.Location = New System.Drawing.Point(10, 24)
-        Me.txtNewGrp.Metrocolor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(212, Byte), Integer))
         Me.txtNewGrp.Name = "txtNewGrp"
         Me.txtNewGrp.Size = New System.Drawing.Size(191, 27)
-        Me.txtNewGrp.Style = Syncfusion.Windows.Forms.Tools.TextBoxExt.theme.[Default]
         Me.txtNewGrp.TabIndex = 11
         Me.txtNewGrp.Text = "Enter New Group Name"
+        Me.txtNewGrp.ThemeName = "Default"
         '
         'cmdAddNewGroup
         '
         Me.cmdAddNewGroup.BeforeTouchSize = New System.Drawing.Size(94, 47)
         Me.cmdAddNewGroup.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdAddNewGroup.IsBackStageButton = False
         Me.cmdAddNewGroup.Location = New System.Drawing.Point(207, 13)
         Me.cmdAddNewGroup.Name = "cmdAddNewGroup"
         Me.cmdAddNewGroup.Size = New System.Drawing.Size(94, 47)
@@ -200,7 +197,6 @@ Partial Class frmReportConfig
         '
         Me.cmdRemoveTag.BeforeTouchSize = New System.Drawing.Size(94, 47)
         Me.cmdRemoveTag.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdRemoveTag.IsBackStageButton = False
         Me.cmdRemoveTag.Location = New System.Drawing.Point(65, 78)
         Me.cmdRemoveTag.Name = "cmdRemoveTag"
         Me.cmdRemoveTag.Size = New System.Drawing.Size(94, 47)
@@ -215,13 +211,12 @@ Partial Class frmReportConfig
         Me.txtSelectedGrp.Enabled = False
         Me.txtSelectedGrp.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSelectedGrp.Location = New System.Drawing.Point(9, 29)
-        Me.txtSelectedGrp.Metrocolor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(212, Byte), Integer))
         Me.txtSelectedGrp.Name = "txtSelectedGrp"
         Me.txtSelectedGrp.Size = New System.Drawing.Size(149, 20)
-        Me.txtSelectedGrp.Style = Syncfusion.Windows.Forms.Tools.TextBoxExt.theme.[Default]
         Me.txtSelectedGrp.TabIndex = 16
         Me.txtSelectedGrp.Text = "selected group"
         Me.txtSelectedGrp.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtSelectedGrp.ThemeName = "Default"
         '
         'GroupBox1
         '
@@ -239,7 +234,6 @@ Partial Class frmReportConfig
         '
         Me.cmdDeleteGroup.BeforeTouchSize = New System.Drawing.Size(94, 47)
         Me.cmdDeleteGroup.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdDeleteGroup.IsBackStageButton = False
         Me.cmdDeleteGroup.Location = New System.Drawing.Point(207, 66)
         Me.cmdDeleteGroup.Name = "cmdDeleteGroup"
         Me.cmdDeleteGroup.Size = New System.Drawing.Size(94, 47)
@@ -273,7 +267,6 @@ Partial Class frmReportConfig
         '
         Me.cmdClose.BeforeTouchSize = New System.Drawing.Size(315, 47)
         Me.cmdClose.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdClose.IsBackStageButton = False
         Me.cmdClose.Location = New System.Drawing.Point(274, 529)
         Me.cmdClose.Name = "cmdClose"
         Me.cmdClose.Size = New System.Drawing.Size(315, 47)
@@ -297,13 +290,12 @@ Partial Class frmReportConfig
         Me.TextBoxExt1.Enabled = False
         Me.TextBoxExt1.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBoxExt1.Location = New System.Drawing.Point(4, 13)
-        Me.TextBoxExt1.Metrocolor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(212, Byte), Integer))
         Me.TextBoxExt1.Name = "TextBoxExt1"
         Me.TextBoxExt1.Size = New System.Drawing.Size(239, 20)
-        Me.TextBoxExt1.Style = Syncfusion.Windows.Forms.Tools.TextBoxExt.theme.[Default]
         Me.TextBoxExt1.TabIndex = 21
         Me.TextBoxExt1.Text = "Select Report Configuration"
         Me.TextBoxExt1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.TextBoxExt1.ThemeName = "Default"
         '
         'taBatchReportConfigTableAdapter
         '
@@ -314,7 +306,6 @@ Partial Class frmReportConfig
         Me.cmdAddConfig.BeforeTouchSize = New System.Drawing.Size(29, 29)
         Me.cmdAddConfig.Image = Global.BDR.My.Resources.Resources.AddRecord16x16
         Me.cmdAddConfig.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.cmdAddConfig.IsBackStageButton = False
         Me.cmdAddConfig.Location = New System.Drawing.Point(512, 7)
         Me.cmdAddConfig.Name = "cmdAddConfig"
         Me.cmdAddConfig.Size = New System.Drawing.Size(29, 29)
@@ -325,7 +316,6 @@ Partial Class frmReportConfig
         Me.cmdDeleteConfig.BeforeTouchSize = New System.Drawing.Size(26, 29)
         Me.cmdDeleteConfig.Image = Global.BDR.My.Resources.Resources.DeleteRecord16x16
         Me.cmdDeleteConfig.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.cmdDeleteConfig.IsBackStageButton = False
         Me.cmdDeleteConfig.Location = New System.Drawing.Point(547, 7)
         Me.cmdDeleteConfig.Name = "cmdDeleteConfig"
         Me.cmdDeleteConfig.Size = New System.Drawing.Size(26, 29)
@@ -333,15 +323,14 @@ Partial Class frmReportConfig
         '
         'cmdActive
         '
-        Me.cmdActive.BeforeTouchSize = New System.Drawing.Size(191, 29)
+        Me.cmdActive.BeforeTouchSize = New System.Drawing.Size(217, 29)
         Me.cmdActive.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdActive.ForeColor = System.Drawing.Color.DarkGreen
-        Me.cmdActive.IsBackStageButton = False
         Me.cmdActive.Location = New System.Drawing.Point(206, 40)
         Me.cmdActive.Name = "cmdActive"
-        Me.cmdActive.Size = New System.Drawing.Size(191, 29)
+        Me.cmdActive.Size = New System.Drawing.Size(217, 29)
         Me.cmdActive.TabIndex = 25
-        Me.cmdActive.Text = "Active"
+        Me.cmdActive.Text = "Make Active"
         '
         'frmReportConfig
         '

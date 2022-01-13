@@ -9,7 +9,7 @@ Public Class frmReport
 
 
         vwConditionEventTableAdapter.Connection.ConnectionString = My.Settings.BPESCnString
-        vwConditionEventTableAdapter.Fill(BPESDataSet.vwEventsWithPhAndRec, gdStartTime, gdEndTime)
+        vwConditionEventTableAdapter.Fill(BPESDataSet.vwEventsWithPhAndRec, gdStartTime, DateAdd(DateInterval.Second, 1, gdEndTime))
         UspBatchAnalogDataByGroupTableAdapter.Connection.ConnectionString = My.Settings.BPESCnString
         UspBatchAnalogDataByGroupTableAdapter.GetBatchAnalogData(BPESDataSet.uspBatchAnalogDataByGroup, frmMain.BatchID, frmMain.Period)
         UspBatchWithPhasesTableAdapter.Connection.ConnectionString = My.Settings.BPESCnString

@@ -152,8 +152,16 @@ Public Class frmReportConfig
     End Sub
 
     Private Sub cmdActive_Click(sender As Object, e As EventArgs) Handles cmdActive.Click
+
         Dim bUpdateID As Integer = Me.cboSelectConfig.SelectedValue
-        taBatchReportConfigTableAdapter.Update(Me.cboSelectConfig.SelectedValue)
+        Dim cn = GetConnection()
+        Dim cmd As System.Data.SqlClient.SqlCommand = New System.Data.SqlClient.SqlCommand("BDR.uspMakeConfigActive", cn) With {
+                .CommandType = CommandType.StoredProcedure,
+                .CommandTimeout = 30
+            }
+        cmd.Parameters.AddWithValue("@ConfigID", bUpdateID)
+        cmd.ExecuteReader()
+
         ResetForm()
         SetConfigLIst()
     End Sub
@@ -166,7 +174,7 @@ Public Class frmReportConfig
             MsgBox("You are limited to 50 char for the description", MsgBoxStyle.Critical, "INVALID OPERATION")
             Exit Sub
         End If
-        taBatchReportConfigTableAdapter.Insert(sDescription, Today(), vbTrue)
+        taBatchReportConfigTableAdapter.Insert(sDescription, Today(), vbFalse)
         SetConfigLIst()
         ResetForm()
     End Sub

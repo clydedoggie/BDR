@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Basic Data Reporter for BPES equipment")>
 <Assembly: AssemblyCompany("PRL Solutions Inc.")>
 <Assembly: AssemblyProduct("BDR")>
-<Assembly: AssemblyCopyright("2020")>
+<Assembly: AssemblyCopyright("2021")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.8.0.0")>
-<Assembly: AssemblyFileVersion("1.8.0.0")>
+<Assembly: AssemblyVersion("1.9.0.0")>
+<Assembly: AssemblyFileVersion("1.9.0.0")>

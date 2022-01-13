@@ -125,9 +125,9 @@
         Dim sSPName As String = ""
 
         If optInterpolated.Checked Then
-            sSPName = "uspInterpolatedAnalogData"
+            sSPName = "BDR.uspInterpolatedAnalogData"
         Else
-            sSPName = "uspAnalogData"
+            sSPName = "BDR.uspAnalogData"
         End If
         sFilename = Replace(Replace(Replace(txtBatchID.Text, " ", ""), "/", ""), ":", "") & ".txt"
         If Not (IsDate(txtStartTime.Text) And IsDate(txtEndTime.Text)) Then
@@ -139,9 +139,10 @@
         Cursor = Cursors.WaitCursor
         Try
             Using cn = GetConnection()
-                Dim cmd As System.Data.SqlClient.SqlCommand = New System.Data.SqlClient.SqlCommand(sSPName, cn)
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandTimeout = 120
+                Dim cmd As System.Data.SqlClient.SqlCommand = New System.Data.SqlClient.SqlCommand(sSPName, cn) With {
+                    .CommandType = CommandType.StoredProcedure,
+                    .CommandTimeout = 120
+                }
                 cmd.Parameters.AddWithValue("@Start", dtStart)
                 cmd.Parameters.AddWithValue("@End", dtEnd)
                 If optInterpolated.Checked Then cmd.Parameters.AddWithValue("@Period", txtPeriod.Text)
@@ -178,6 +179,7 @@
             End Using
         Catch
             Cursor = Cursors.Default
+            MsgBox(Err.Description())
             MsgBox("Cannot process that timespan, try increasing period or decreasing time span")
         End Try
         Cursor = Cursors.Default

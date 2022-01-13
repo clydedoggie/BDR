@@ -1926,7 +1926,7 @@ Partial Public Class BPESDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Overloads Function AdduspBatchAnalogDataByGroupRow(ByVal ts As Date, ByVal TagGroup As String, ByVal TagName As String, ByVal TagValue As Integer) As uspBatchAnalogDataByGroupRow
+        Public Overloads Function AdduspBatchAnalogDataByGroupRow(ByVal ts As Date, ByVal TagGroup As String, ByVal TagName As String, ByVal TagValue As Double) As uspBatchAnalogDataByGroupRow
             Dim rowuspBatchAnalogDataByGroupRow As uspBatchAnalogDataByGroupRow = CType(Me.NewRow,uspBatchAnalogDataByGroupRow)
             Dim columnValuesArray() As Object = New Object() {ts, TagGroup, TagName, TagValue}
             rowuspBatchAnalogDataByGroupRow.ItemArray = columnValuesArray
@@ -1966,7 +1966,7 @@ Partial Public Class BPESDataSet
             MyBase.Columns.Add(Me.columnTagGroup)
             Me.columnTagName = New Global.System.Data.DataColumn("TagName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTagName)
-            Me.columnTagValue = New Global.System.Data.DataColumn("TagValue", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnTagValue = New Global.System.Data.DataColumn("TagValue", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTagValue)
             Me.columnts.ReadOnly = true
             Me.columnTagGroup.ReadOnly = true
@@ -4375,10 +4375,10 @@ Partial Public Class BPESDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property TagValue() As Integer
+        Public Property TagValue() As Double
             Get
                 Try 
-                    Return CType(Me(Me.tableuspBatchAnalogDataByGroup.TagValueColumn),Integer)
+                    Return CType(Me(Me.tableuspBatchAnalogDataByGroup.TagValueColumn),Double)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'TagValue' in table 'uspBatchAnalogDataByGroup' is DBNull.", e)
                 End Try
