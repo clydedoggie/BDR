@@ -2,6 +2,9 @@
 
 
 Partial Class BPESDataSet
+    Partial Public Class vwEventsWithPhAndRecDataTable
+    End Class
+
     Partial Public Class BatchReportConfigGroupsDataTable
     End Class
 
