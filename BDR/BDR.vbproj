@@ -9,7 +9,7 @@
     <RootNamespace>BDR</RootNamespace>
     <AssemblyName>BDR</AssemblyName>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
@@ -129,6 +129,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Import Include="Microsoft.Reporting" />
+    <Import Include="Microsoft.Reporting.WinForms" />
+    <Import Include="Microsoft.ReportingServices.Interfaces" />
+    <Import Include="Microsoft.ReportingServices.ReportProcessing.ReportObjectModel" />
+    <Import Include="Microsoft.SqlServer.Types" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="Microsoft.VisualBasic.FileIO" />
     <Import Include="System" />
