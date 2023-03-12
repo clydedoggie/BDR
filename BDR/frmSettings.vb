@@ -10,6 +10,7 @@ Public Class frmSettings
         txtAEReportPath.Text = My.Settings.AEReportPath
         txtBatchReportPath.Text = My.Settings.BatchReportPath
         chkAutoRptOn.Checked = My.Settings.AutoReportOn
+        chk24Hr.Checked = My.Settings.Use24Hr
         Me.lblVersion.Text = "CPS Basic Data Reporting v" & Assembly.GetExecutingAssembly().GetName().Version.Major & "." & Assembly.GetExecutingAssembly().GetName().Version.Minor
     End Sub
 
@@ -47,7 +48,7 @@ Public Class frmSettings
 
     End Sub
 
-    Private Sub txtBatchReportPath_Clicked(sender As Object, e As EventArgs) Handles txtBatchReportPath.Click
+    Private Sub txtBatchReportPath_Clicked(sender As Object, e As EventArgs)
 
         Dim oGetFldrPath As New FolderBrowserDialog()
 
@@ -57,7 +58,7 @@ Public Class frmSettings
         End If
 
     End Sub
-    Private Sub txtAEReportPath_Clicked(sender As Object, e As EventArgs) Handles txtAEReportPath.Click
+    Private Sub txtAEReportPath_Clicked(sender As Object, e As EventArgs)
 
         Dim oGetFldrPath As New FolderBrowserDialog()
 
@@ -68,4 +69,7 @@ Public Class frmSettings
 
     End Sub
 
+    Private Sub btnUpdateOptions_Click(sender As Object, e As EventArgs) Handles btnUpdateOptions.Click
+        My.Settings.Use24Hr = chk24Hr.Checked
+    End Sub
 End Class

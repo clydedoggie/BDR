@@ -22,5 +22,8 @@
     <Setting Name="BPESCnString" Type="System.String" Scope="User">
       <Value Profile="(Default)">Data Source=PRL-ENVY\SQL2019;Initial Catalog=BPES;Integrated Security=True;Connect Timeout=60</Value>
     </Setting>
+    <Setting Name="Use24Hr" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
