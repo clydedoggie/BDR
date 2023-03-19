@@ -292,11 +292,14 @@
                                 <Style>
                                   <FontFamily>Tahoma</FontFamily>
                                   <FontWeight>Bold</FontWeight>
+                                  <Format>=Parameters!DateFormatLong.Value</Format>
                                   <Color>#4d4d4d</Color>
                                 </Style>
                               </TextRun>
                             </TextRuns>
-                            <Style />
+                            <Style>
+                              <TextAlign>Left</TextAlign>
+                            </Style>
                           </Paragraph>
                         </Paragraphs>
                         <rd:DefaultName>EventTimeStamp1</rd:DefaultName>
@@ -393,8 +396,8 @@ IIf(Parameters!ShowAlarms.Value,Fields!Classification.Value="Alarm" xor Fields!C
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>="Start: " &amp; FormatDateTime(Parameters!StartTime.Value,dateformat.ShortDate ) &amp; " " &amp; FormatDateTime(Parameters!StartTime.Value,dateformat.longtime )
- &amp; "   End: " &amp; Parameters!EndTime.Value</Value>
+                      <Value>="Start: " &amp; Format(Parameters!StartTime.Value,Parameters!DateFormatShort.Value )
+ &amp; "   End: " &amp; Format(Parameters!EndTime.Value,Parameters!DateFormatShort.Value)</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -424,7 +427,7 @@ IIf(Parameters!ShowAlarms.Value,Fields!Classification.Value="Alarm" xor Fields!C
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>="Batch ID: " &amp; Parameters!BatchID.Value</Value>
+                      <Value>="Batch ID: " &amp; format(cdate(Parameters!BatchID.Value),Parameters!DateFormatShort.Value)</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -464,7 +467,7 @@ IIf(Parameters!ShowAlarms.Value,Fields!Classification.Value="Alarm" xor Fields!C
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>="Printed " &amp; Globals!ExecutionTime</Value>
+                      <Value>="Printed " &amp; format(Globals!ExecutionTime,Parameters!DateFormatShort.Value)</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -556,11 +559,19 @@ IIf(Parameters!ShowAlarms.Value,Fields!Classification.Value="Alarm" xor Fields!C
       <Nullable>true</Nullable>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="DateFormatShort">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DateFormatLong">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>2</NumberOfColumns>
-      <NumberOfRows>3</NumberOfRows>
+      <NumberOfRows>4</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -586,6 +597,16 @@ IIf(Parameters!ShowAlarms.Value,Fields!Classification.Value="Alarm" xor Fields!C
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>2</RowIndex>
           <ParameterName>ShowAlarms</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>DateFormatShort</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>DateFormatLong</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

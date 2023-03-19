@@ -71,5 +71,12 @@ Public Class frmSettings
 
     Private Sub btnUpdateOptions_Click(sender As Object, e As EventArgs) Handles btnUpdateOptions.Click
         My.Settings.Use24Hr = chk24Hr.Checked
+        If chk24Hr.Checked Then
+            GlobalVariables.TimeFormatLong = "MM/dd/yy HH:mm:ss.f"
+            GlobalVariables.TimeFormatShort = "MM/dd/yy HH:mm:ss"
+        Else
+            GlobalVariables.TimeFormatLong = "MM/dd/yy hh:mm:ss.f tt"
+            GlobalVariables.TimeFormatShort = "MM/dd/yy hh:mm:ss tt"
+        End If
     End Sub
 End Class
