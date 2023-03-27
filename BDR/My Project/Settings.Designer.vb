@@ -113,6 +113,18 @@ Namespace My
                 Me("BPESCnString") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property Use24Hr() As Boolean
+            Get
+                Return CType(Me("Use24Hr"),Boolean)
+            End Get
+            Set
+                Me("Use24Hr") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

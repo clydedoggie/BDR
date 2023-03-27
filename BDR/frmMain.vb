@@ -13,19 +13,21 @@
             MsgBox("Could not connect to Data - Check Connection", vbCritical, "ERROR GETTING BATCH INFORMATION")
             grdBatchSelection.AllowResizeToFit = False
         End Try
-        grdBatchSelection.Model.ColWidths(1) = 125
-        grdBatchSelection.Model.ColWidths(2) = 262
-        grdBatchSelection.Model.ColWidths(3) = 125
-        grdBatchSelection.Model.ColWidths(4) = 125
-        grdBatchSelection.Model.ColWidths(5) = 85
-        grdBatchSelection.Top = 10
-        grdBatchSelection.Left = 474
-        grdBatchSelection.Width = 780
-        grdBatchSelection.Height = 232
-        Width = 1280
-        Height = 250
-        Left = 0
-        Top = 640
+        'grid sizing doesn't seem to take properties as configured at design time, so manually set them when form opens
+        grdBatchSelection.Model.ColWidths(1) = 150
+        grdBatchSelection.Model.ColWidths(2) = 280
+        grdBatchSelection.Model.ColWidths(3) = 130
+        grdBatchSelection.Model.ColWidths(4) = 130
+        grdBatchSelection.Model.ColWidths(5) = 100
+        grdBatchSelection.Top = 145
+        grdBatchSelection.Left = 52
+        grdBatchSelection.Width = 840
+        grdBatchSelection.Height = 420
+        'set time format to 24 hr or AM/PM, formats set in Startup event
+        grdBatchSelection.GridBoundColumns("StartTime").StyleInfo.Format = GlobalVariables.TimeFormatShort
+        grdBatchSelection.GridBoundColumns("EndTime").StyleInfo.Format = GlobalVariables.TimeFormatShort
+        grdBatchSelection.GridBoundColumns("PLCBatchID").StyleInfo.Format = GlobalVariables.TimeFormatShort
+
         ShowActiveConfig()
     End Sub
 

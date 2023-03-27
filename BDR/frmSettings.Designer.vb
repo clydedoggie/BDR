@@ -27,9 +27,11 @@ Partial Class frmSettings
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.btnUpdateCn = New System.Windows.Forms.Button()
         Me.lblVersion = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.chkAutoRptOn = New System.Windows.Forms.CheckBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtAEReportPath = New System.Windows.Forms.TextBox()
@@ -37,11 +39,9 @@ Partial Class frmSettings
         Me.txtBatchReportPath = New System.Windows.Forms.TextBox()
         Me.cmdUpdateAutoReport = New System.Windows.Forms.Button()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.btnUpdateOptions = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.chk24Hr = New System.Windows.Forms.CheckBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.btnUpdateOptions = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -95,9 +95,19 @@ Partial Class frmSettings
         Me.Panel1.Size = New System.Drawing.Size(479, 86)
         Me.Panel1.TabIndex = 5
         '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(7, 4)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(70, 16)
+        Me.Label7.TabIndex = 17
+        Me.Label7.Text = "Database"
+        '
         'btnUpdateCn
         '
-        Me.btnUpdateCn.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUpdateCn.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUpdateCn.Location = New System.Drawing.Point(410, 29)
         Me.btnUpdateCn.Name = "btnUpdateCn"
         Me.btnUpdateCn.Size = New System.Drawing.Size(67, 46)
@@ -129,6 +139,16 @@ Partial Class frmSettings
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(479, 86)
         Me.Panel2.TabIndex = 11
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(7, 4)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(203, 16)
+        Me.Label6.TabIndex = 16
+        Me.Label6.Text = "Automatic  Report Generation"
         '
         'chkAutoRptOn
         '
@@ -180,7 +200,7 @@ Partial Class frmSettings
         '
         'cmdUpdateAutoReport
         '
-        Me.cmdUpdateAutoReport.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdUpdateAutoReport.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdUpdateAutoReport.Location = New System.Drawing.Point(410, 33)
         Me.cmdUpdateAutoReport.Name = "cmdUpdateAutoReport"
         Me.cmdUpdateAutoReport.Size = New System.Drawing.Size(67, 46)
@@ -198,6 +218,16 @@ Partial Class frmSettings
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(479, 86)
         Me.Panel3.TabIndex = 12
+        '
+        'btnUpdateOptions
+        '
+        Me.btnUpdateOptions.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUpdateOptions.Location = New System.Drawing.Point(410, 37)
+        Me.btnUpdateOptions.Name = "btnUpdateOptions"
+        Me.btnUpdateOptions.Size = New System.Drawing.Size(67, 46)
+        Me.btnUpdateOptions.TabIndex = 15
+        Me.btnUpdateOptions.Text = "Update"
+        Me.btnUpdateOptions.UseVisualStyleBackColor = True
         '
         'Label3
         '
@@ -220,36 +250,6 @@ Partial Class frmSettings
         Me.chk24Hr.Text = "Use 24 Hr Date Format"
         Me.chk24Hr.UseVisualStyleBackColor = True
         '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(7, 4)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(203, 16)
-        Me.Label6.TabIndex = 16
-        Me.Label6.Text = "Automatic  Report Generation"
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(7, 4)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(70, 16)
-        Me.Label7.TabIndex = 17
-        Me.Label7.Text = "Database"
-        '
-        'btnUpdateOptions
-        '
-        Me.btnUpdateOptions.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpdateOptions.Location = New System.Drawing.Point(410, 37)
-        Me.btnUpdateOptions.Name = "btnUpdateOptions"
-        Me.btnUpdateOptions.Size = New System.Drawing.Size(67, 46)
-        Me.btnUpdateOptions.TabIndex = 15
-        Me.btnUpdateOptions.Text = "Update"
-        Me.btnUpdateOptions.UseVisualStyleBackColor = True
-        '
         'frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -259,8 +259,13 @@ Partial Class frmSettings
         Me.Controls.Add(Me.lblVersion)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmSettings"
+        Me.ShowInTaskbar = False
         Me.Text = "SETTINGS"
+        Me.TopMost = True
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
