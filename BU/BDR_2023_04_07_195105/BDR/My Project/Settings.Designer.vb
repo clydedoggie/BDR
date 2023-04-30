@@ -93,8 +93,8 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=PRL-ENVY\SQL2019;Initial Catalog=BPES_4135;Integrated Security=True;C"& _ 
-            "onnect Timeout=60")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=PRL-ENVY\SQL2019;Initial Catalog=BPES;Integrated Security=True;Connec"& _ 
+            "t Timeout=60")>  _
         Public ReadOnly Property BPESConnectionString() As String
             Get
                 Return CType(Me("BPESConnectionString"),String)
@@ -103,8 +103,8 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=PRL-ENVY\SQL2019;Initial Catalog=BPES_4135;Integrated Security=True;C"& _ 
-            "onnect Timeout=60")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=PRL-ENVY\SQL2019;Initial Catalog=BPES;Integrated Security=True;Connec"& _ 
+            "t Timeout=60")>  _
         Public Property BPESCnString() As String
             Get
                 Return CType(Me("BPESCnString"),String)

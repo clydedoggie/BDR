@@ -406,9 +406,38 @@ IIf(Parameters!ShowAlarms.Value,Fields!Classification.Value="Alarm" xor Fields!C
               </Paragraphs>
               <rd:DefaultName>Textbox12</rd:DefaultName>
               <Top>0.44333in</Top>
+              <Left>3.58208in</Left>
               <Height>0.27555in</Height>
-              <Width>7.58333in</Width>
+              <Width>4.00125in</Width>
               <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="txtBatchID">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>="Batch ID: " &amp; format(cdate(Parameters!BatchID.Value),Parameters!DateFormatShort.Value)</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.44333in</Top>
+              <Height>0.27555in</Height>
+              <Width>3.51264in</Width>
+              <ZIndex>2</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>

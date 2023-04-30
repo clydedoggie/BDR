@@ -1,6 +1,4 @@
-﻿Imports Syncfusion.WinForms.Input.Events
-
-Public Class frmMain
+﻿Public Class frmMain
 
     Public BatchID As Long
     Public Period As Long
@@ -17,24 +15,21 @@ Public Class frmMain
         End Try
         'grid sizing doesn't seem to take properties as configured at design time, so manually set them when form opens
         grdBatchSelection.Model.ColWidths(1) = 150
-        grdBatchSelection.Model.ColWidths(2) = 300
-        grdBatchSelection.Model.ColWidths(3) = 139
-        grdBatchSelection.Model.ColWidths(4) = 139
+        grdBatchSelection.Model.ColWidths(2) = 280
+        grdBatchSelection.Model.ColWidths(3) = 130
+        grdBatchSelection.Model.ColWidths(4) = 130
         grdBatchSelection.Model.ColWidths(5) = 100
         grdBatchSelection.Top = 145
         grdBatchSelection.Left = 52
-        grdBatchSelection.Width = 878
+        grdBatchSelection.Width = 840
         grdBatchSelection.Height = 420
         'set time format to 24 hr or AM/PM, formats set in Startup event
         grdBatchSelection.GridBoundColumns("StartTime").StyleInfo.Format = GlobalVariables.TimeFormatShort
         grdBatchSelection.GridBoundColumns("EndTime").StyleInfo.Format = GlobalVariables.TimeFormatShort
         grdBatchSelection.GridBoundColumns("PLCBatchID").StyleInfo.Format = GlobalVariables.TimeFormatShort
-        txtStartTime.Format = GlobalVariables.TimeFormatShort
-        txtEndTime.Format = GlobalVariables.TimeFormatShort
 
         ShowActiveConfig()
     End Sub
-
 
     Private Sub ShowActiveConfig()
         Dim dt As BPESDataSetTableAdapters.BatchReportConfigTableAdapter = New BPESDataSetTableAdapters.BatchReportConfigTableAdapter
@@ -66,8 +61,8 @@ Public Class frmMain
         If grdBatchSelection.Model.SelectedRanges.Count > 0 Then
             ' txtStartTime.Text = Format(grdBatchSelection(grdBatchSelection.Model.SelectedRanges(0).Top, 3).CellValue, "M/dd/yy HH:mm:ss")
             'txtEndTime.Text = Format(grdBatchSelection(grdBatchSelection.Model.SelectedRanges(0).Top, 4).CellValue, "M/dd/yy HH:mm:ss")
-            txtStartTime.Value = grdBatchSelection(grdBatchSelection.Model.SelectedRanges(0).Top, 3).CellValue
-            txtEndTime.Value = grdBatchSelection(grdBatchSelection.Model.SelectedRanges(0).Top, 4).CellValue
+            txtStartTime.Text = grdBatchSelection(grdBatchSelection.Model.SelectedRanges(0).Top, 3).CellValue
+            txtEndTime.Text = grdBatchSelection(grdBatchSelection.Model.SelectedRanges(0).Top, 4).CellValue
             txtBatchID.Text = grdBatchSelection(grdBatchSelection.Model.SelectedRanges(0).Top, 1).Text
             btnBatchRpt.Enabled = True
         Else
@@ -80,26 +75,32 @@ Public Class frmMain
         btnBatchRpt.Enabled = False
     End Sub
 
+    Private Sub txtStartTime_TextChanged(sender As Object, e As EventArgs) Handles txtStartTime.TextChanged
+        CustomTimes()
+    End Sub
 
+    Private Sub txtEndTime_TextChanged(sender As Object, e As EventArgs) Handles txtEndTime.TextChanged
+        CustomTimes()
+    End Sub
 
     Private Sub btnEventReport_Click(sender As Object, e As EventArgs) Handles btnEventReport.Click
-        ShowEventReport()
+        ShowEventReport
     End Sub
 
     Public Sub ShowEventReport()
         Dim params(4) As Microsoft.Reporting.WinForms.ReportParameter
-        If Not (IsDate(txtStartTime.Value) And IsDate(txtEndTime.Value)) Then
+        If Not (IsDate(txtStartTime.Text) And IsDate(txtEndTime.Text)) Then
             MsgBox("Invalid Dates")
             Exit Sub
         End If
         glReportType = 1
-        gdStartTime = Date.Parse(txtStartTime.Value)
-        gdEndTime = Date.Parse(txtEndTime.Value)
+        gdStartTime = Date.Parse(txtStartTime.Text)
+        gdEndTime = Date.Parse(txtEndTime.Text)
 
         Cursor = Cursors.WaitCursor
         Try
-            params(0) = New Microsoft.Reporting.WinForms.ReportParameter("StartTime", txtStartTime.Value)
-            params(1) = New Microsoft.Reporting.WinForms.ReportParameter("EndTime", txtEndTime.Value)
+            params(0) = New Microsoft.Reporting.WinForms.ReportParameter("StartTime", txtStartTime.Text)
+            params(1) = New Microsoft.Reporting.WinForms.ReportParameter("EndTime", txtEndTime.Text)
             params(2) = New Microsoft.Reporting.WinForms.ReportParameter("BatchID", txtBatchID.Text)
             params(3) = New Microsoft.Reporting.WinForms.ReportParameter("ShowEvents", chkEvents.Checked)
             params(4) = New Microsoft.Reporting.WinForms.ReportParameter("ShowAlarms", chkAlarms.Checked)
@@ -131,12 +132,12 @@ Public Class frmMain
             sSPName = "BDR.uspAnalogData"
         End If
         sFilename = Replace(Replace(Replace(txtBatchID.Text, " ", ""), "/", ""), ":", "") & ".txt"
-        If Not (IsDate(txtStartTime.Value) And IsDate(txtEndTime.Value)) Then
+        If Not (IsDate(txtStartTime.Text) And IsDate(txtEndTime.Text)) Then
             MsgBox("Invalid Dates")
             Exit Sub
         End If
-        dtStart = Date.Parse(txtStartTime.Value)
-        dtEnd = Date.Parse(txtEndTime.Value)
+        dtStart = Date.Parse(txtStartTime.Text)
+        dtEnd = Date.Parse(txtEndTime.Text)
         Cursor = Cursors.WaitCursor
         Try
             Using cn = GetConnection()
@@ -199,21 +200,21 @@ Public Class frmMain
         Dim params(3) As Microsoft.Reporting.WinForms.ReportParameter
 
         If Not bRemote Then
-            If Not (IsDate(txtStartTime.Value) And IsDate(txtEndTime.Value)) Then
+            If Not (IsDate(txtStartTime.Text) And IsDate(txtEndTime.Text)) Then
                 MsgBox("Invalid Dates")
                 Exit Sub
             End If
         End If
         glReportType = 2
-        gdStartTime = Date.Parse(txtStartTime.Value)
-        gdEndTime = Date.Parse(txtEndTime.Value)
+        gdStartTime = Date.Parse(txtStartTime.Text)
+        gdEndTime = Date.Parse(txtEndTime.Text)
 
         Cursor = Cursors.WaitCursor
         Try
             Period = txtPeriod.Text
             BatchID = grdBatchSelection(grdBatchSelection.Model.SelectedRanges(0).Top, 6).Text
-            params(0) = New Microsoft.Reporting.WinForms.ReportParameter("StartTime", txtStartTime.Value)
-            params(1) = New Microsoft.Reporting.WinForms.ReportParameter("EndTime", txtEndTime.Value)
+            params(0) = New Microsoft.Reporting.WinForms.ReportParameter("StartTime", txtStartTime.Text)
+            params(1) = New Microsoft.Reporting.WinForms.ReportParameter("EndTime", txtEndTime.Text)
             params(2) = New Microsoft.Reporting.WinForms.ReportParameter("BatchID", txtBatchID.Text)
             params(3) = New Microsoft.Reporting.WinForms.ReportParameter("BatchDesc", grdBatchSelection(grdBatchSelection.Model.SelectedRanges(0).Top, 2).Text)
             frmReport.Show()
@@ -230,22 +231,12 @@ Public Class frmMain
     End Sub
 
     Private Sub cmdReportConfig_Click(sender As Object, e As EventArgs) Handles cmdReportConfig.Click
-        Me.TopMost = False
-        frmReportConfig.ShowDialog(Me)
-        Me.TopMost = True
+        frmReportConfig.ShowDialog()
         ShowActiveConfig()
     End Sub
 
     Private Sub optInterpolated_CheckedChanged(sender As Object, e As EventArgs) Handles optInterpolated.CheckedChanged
         lblPeriod.Enabled = optInterpolated.Checked
         txtPeriod.Enabled = optInterpolated.Checked
-    End Sub
-
-    Private Sub txtStartTime_ValueChanged(sender As Object, e As DateTimeValueChangedEventArgs) Handles txtStartTime.ValueChanged
-        CustomTimes()
-    End Sub
-
-    Private Sub txtEndTime_ValueChanged(sender As Object, e As DateTimeValueChangedEventArgs) Handles txtEndTime.ValueChanged
-        CustomTimes()
     End Sub
 End Class

@@ -39,6 +39,8 @@ Partial Class frmMain
         Me.colEndState = New Syncfusion.Windows.Forms.Grid.GridBoundColumn()
         Me.colBatchID = New Syncfusion.Windows.Forms.Grid.GridBoundColumn()
         Me.txtBatchID = New System.Windows.Forms.TextBox()
+        Me.txtStartTime = New System.Windows.Forms.TextBox()
+        Me.txtEndTime = New System.Windows.Forms.TextBox()
         Me.lblBatchID = New System.Windows.Forms.Label()
         Me.lblStartTime = New System.Windows.Forms.Label()
         Me.lblEndTime = New System.Windows.Forms.Label()
@@ -63,8 +65,7 @@ Partial Class frmMain
         Me.QryTagTableBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.UspBatchListTableAdapter = New BDR.BPESDataSetTableAdapters.uspBatchListTableAdapter()
         Me.qryTagTableTableAdapter = New BDR.BPESDataSetTableAdapters.qryTagTableTableAdapter()
-        Me.txtStartTime = New Syncfusion.WinForms.Input.SfDateTimeEdit()
-        Me.txtEndTime = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         CType(Me.grdBatchSelection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BPESDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BPESDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -121,7 +122,7 @@ Partial Class frmMain
         Me.grdBatchSelection.Name = "grdBatchSelection"
         Me.grdBatchSelection.OptimizeInsertRemoveCells = True
         Me.grdBatchSelection.ShowCurrentCellBorderBehavior = Syncfusion.Windows.Forms.Grid.GridShowCurrentCellBorder.GrayWhenLostFocus
-        Me.grdBatchSelection.Size = New System.Drawing.Size(878, 435)
+        Me.grdBatchSelection.Size = New System.Drawing.Size(840, 435)
         Me.grdBatchSelection.SmartSizeBox = False
         Me.grdBatchSelection.SortBehavior = Syncfusion.Windows.Forms.Grid.GridSortBehavior.DoubleClick
         Me.grdBatchSelection.TabIndex = 0
@@ -223,8 +224,24 @@ Partial Class frmMain
         Me.txtBatchID.Enabled = False
         Me.txtBatchID.Location = New System.Drawing.Point(117, 8)
         Me.txtBatchID.Name = "txtBatchID"
-        Me.txtBatchID.Size = New System.Drawing.Size(473, 24)
+        Me.txtBatchID.Size = New System.Drawing.Size(343, 24)
         Me.txtBatchID.TabIndex = 1
+        '
+        'txtStartTime
+        '
+        Me.txtStartTime.Location = New System.Drawing.Point(117, 39)
+        Me.txtStartTime.Name = "txtStartTime"
+        Me.txtStartTime.Size = New System.Drawing.Size(150, 24)
+        Me.txtStartTime.TabIndex = 2
+        Me.txtStartTime.WordWrap = False
+        '
+        'txtEndTime
+        '
+        Me.txtEndTime.Location = New System.Drawing.Point(310, 39)
+        Me.txtEndTime.Name = "txtEndTime"
+        Me.txtEndTime.Size = New System.Drawing.Size(150, 24)
+        Me.txtEndTime.TabIndex = 3
+        Me.txtEndTime.WordWrap = False
         '
         'lblBatchID
         '
@@ -247,7 +264,7 @@ Partial Class frmMain
         'lblEndTime
         '
         Me.lblEndTime.AutoSize = True
-        Me.lblEndTime.Location = New System.Drawing.Point(339, 46)
+        Me.lblEndTime.Location = New System.Drawing.Point(275, 46)
         Me.lblEndTime.Name = "lblEndTime"
         Me.lblEndTime.Size = New System.Drawing.Size(32, 17)
         Me.lblEndTime.TabIndex = 6
@@ -266,7 +283,7 @@ Partial Class frmMain
         '
         'btnData
         '
-        Me.btnData.Location = New System.Drawing.Point(212, 17)
+        Me.btnData.Location = New System.Drawing.Point(212, 20)
         Me.btnData.Name = "btnData"
         Me.btnData.Size = New System.Drawing.Size(108, 38)
         Me.btnData.TabIndex = 11
@@ -311,7 +328,7 @@ Partial Class frmMain
         Me.GroupBox1.Controls.Add(Me.chkAlarms)
         Me.GroupBox1.Controls.Add(Me.chkEvents)
         Me.GroupBox1.Controls.Add(Me.btnEventReport)
-        Me.GroupBox1.Location = New System.Drawing.Point(603, 2)
+        Me.GroupBox1.Location = New System.Drawing.Point(565, 2)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(328, 62)
         Me.GroupBox1.TabIndex = 12
@@ -323,7 +340,7 @@ Partial Class frmMain
         Me.GroupBox2.Controls.Add(Me.lblPeriod)
         Me.GroupBox2.Controls.Add(Me.txtPeriod)
         Me.GroupBox2.Controls.Add(Me.btnData)
-        Me.GroupBox2.Location = New System.Drawing.Point(603, 66)
+        Me.GroupBox2.Location = New System.Drawing.Point(565, 66)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(328, 62)
         Me.GroupBox2.TabIndex = 13
@@ -389,7 +406,7 @@ Partial Class frmMain
         '
         'btnBatchRpt
         '
-        Me.btnBatchRpt.Location = New System.Drawing.Point(354, 17)
+        Me.btnBatchRpt.Location = New System.Drawing.Point(221, 13)
         Me.btnBatchRpt.Name = "btnBatchRpt"
         Me.btnBatchRpt.Size = New System.Drawing.Size(108, 38)
         Me.btnBatchRpt.TabIndex = 15
@@ -404,7 +421,7 @@ Partial Class frmMain
         Me.GroupBox3.Controls.Add(Me.cmdReportConfig)
         Me.GroupBox3.Location = New System.Drawing.Point(117, 66)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(473, 62)
+        Me.GroupBox3.Size = New System.Drawing.Size(343, 62)
         Me.GroupBox3.TabIndex = 16
         Me.GroupBox3.TabStop = False
         '
@@ -412,11 +429,11 @@ Partial Class frmMain
         '
         Me.txtActiveConfig.BackColor = System.Drawing.SystemColors.Control
         Me.txtActiveConfig.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtActiveConfig.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtActiveConfig.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtActiveConfig.ForeColor = System.Drawing.Color.Blue
-        Me.txtActiveConfig.Location = New System.Drawing.Point(91, 35)
+        Me.txtActiveConfig.Location = New System.Drawing.Point(9, 35)
         Me.txtActiveConfig.Name = "txtActiveConfig"
-        Me.txtActiveConfig.Size = New System.Drawing.Size(257, 17)
+        Me.txtActiveConfig.Size = New System.Drawing.Size(152, 16)
         Me.txtActiveConfig.TabIndex = 19
         Me.txtActiveConfig.TabStop = False
         Me.txtActiveConfig.Text = "Active Config"
@@ -426,7 +443,7 @@ Partial Class frmMain
         'lblReportConfig
         '
         Me.lblReportConfig.AutoSize = True
-        Me.lblReportConfig.Location = New System.Drawing.Point(151, 14)
+        Me.lblReportConfig.Location = New System.Drawing.Point(14, 14)
         Me.lblReportConfig.Name = "lblReportConfig"
         Me.lblReportConfig.Size = New System.Drawing.Size(136, 17)
         Me.lblReportConfig.TabIndex = 18
@@ -436,14 +453,13 @@ Partial Class frmMain
         '
         Me.cmdReportConfig.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdReportConfig.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.cmdReportConfig.Location = New System.Drawing.Point(20, 18)
+        Me.cmdReportConfig.Location = New System.Drawing.Point(167, 14)
         Me.cmdReportConfig.Margin = New System.Windows.Forms.Padding(3, 0, 3, 3)
         Me.cmdReportConfig.Name = "cmdReportConfig"
         Me.cmdReportConfig.Size = New System.Drawing.Size(40, 37)
         Me.cmdReportConfig.TabIndex = 17
         Me.cmdReportConfig.Text = "..."
         Me.cmdReportConfig.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.cmdReportConfig.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage
         Me.cmdReportConfig.UseVisualStyleBackColor = True
         '
         'QryTagTableBindingSource
@@ -459,48 +475,29 @@ Partial Class frmMain
         '
         Me.qryTagTableTableAdapter.ClearBeforeFill = True
         '
-        'txtStartTime
+        'DateTimePicker1
         '
-        Me.txtStartTime.AllowNull = True
-        Me.txtStartTime.AllowValueChangeOnMouseWheel = True
-        Me.txtStartTime.CanApplyTheme = False
-        Me.txtStartTime.Cursor = System.Windows.Forms.Cursors.Default
-        Me.txtStartTime.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
-        Me.txtStartTime.DateTimePattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom
-        Me.txtStartTime.Location = New System.Drawing.Point(117, 39)
-        Me.txtStartTime.Name = "txtStartTime"
-        Me.txtStartTime.Size = New System.Drawing.Size(216, 25)
-        Me.txtStartTime.TabIndex = 17
-        Me.txtStartTime.Value = Nothing
-        '
-        'txtEndTime
-        '
-        Me.txtEndTime.AllowNull = True
-        Me.txtEndTime.AllowValueChangeOnMouseWheel = True
-        Me.txtEndTime.CanApplyTheme = False
-        Me.txtEndTime.Cursor = System.Windows.Forms.Cursors.Default
-        Me.txtEndTime.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
-        Me.txtEndTime.DateTimePattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom
-        Me.txtEndTime.Location = New System.Drawing.Point(374, 39)
-        Me.txtEndTime.Name = "txtEndTime"
-        Me.txtEndTime.Size = New System.Drawing.Size(216, 25)
-        Me.txtEndTime.TabIndex = 18
-        Me.txtEndTime.Value = Nothing
+        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.DateTimePicker1.Location = New System.Drawing.Point(53, 123)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(200, 24)
+        Me.DateTimePicker1.TabIndex = 17
         '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ClientSize = New System.Drawing.Size(984, 612)
-        Me.Controls.Add(Me.txtEndTime)
-        Me.Controls.Add(Me.txtStartTime)
+        Me.ClientSize = New System.Drawing.Size(942, 612)
+        Me.Controls.Add(Me.DateTimePicker1)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.btnTools)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.lblEndTime)
         Me.Controls.Add(Me.lblStartTime)
         Me.Controls.Add(Me.lblBatchID)
+        Me.Controls.Add(Me.txtEndTime)
+        Me.Controls.Add(Me.txtStartTime)
         Me.Controls.Add(Me.txtBatchID)
         Me.Controls.Add(Me.grdBatchSelection)
         Me.Controls.Add(Me.GroupBox1)
@@ -542,6 +539,8 @@ Partial Class frmMain
     Friend WithEvents colEndTime As Syncfusion.Windows.Forms.Grid.GridBoundColumn
     Friend WithEvents colEndState As Syncfusion.Windows.Forms.Grid.GridBoundColumn
     Friend WithEvents txtBatchID As TextBox
+    Friend WithEvents txtStartTime As TextBox
+    Friend WithEvents txtEndTime As TextBox
     Friend WithEvents lblBatchID As Label
     Friend WithEvents lblStartTime As Label
     Friend WithEvents lblEndTime As Label
@@ -566,6 +565,5 @@ Partial Class frmMain
     Friend WithEvents optInterpolated As RadioButton
     Friend WithEvents txtActiveConfig As TextBox
     Friend WithEvents lblReportConfig As Label
-    Friend WithEvents txtStartTime As Syncfusion.WinForms.Input.SfDateTimeEdit
-    Friend WithEvents txtEndTime As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents DateTimePicker1 As DateTimePicker
 End Class

@@ -46,14 +46,14 @@ Module mdlMain
                     frmMain.grdBatchSelection.Model.Selections.Clear()
                     frmMain.grdBatchSelection.Model.Selections.Add(Syncfusion.Windows.Forms.Grid.GridRangeInfo.Rows(1, 1))
                     frmMain.MoveGridToTextBoxes()
-                    dDateAndTime = frmMain.txtStartTime.Value
+                    dDateAndTime = frmMain.txtStartTime.Text
                     sFileName = My.Settings.BatchReportPath & "\Batch Report " & Format(dDateAndTime, "dd-MMM-yy HH.mm.ss") & ".pdf"
                     frmMain.ShowBatchReport()
                 Else
                     dDateAndTime = DateAdd(DateInterval.Day, -1, dDateAndTime)
                     sFileName = My.Settings.AEReportPath & "\Event and Alarm Report " & dDateAndTime.Month & "_" & dDateAndTime.Day & "_" & dDateAndTime.Year & ".pdf"
-                    frmMain.txtStartTime.Value = dDateAndTime.Month & "/" & dDateAndTime.Day & "/" & dDateAndTime.Year & " 00:00:00"
-                    frmMain.txtEndTime.Value = dDateAndTime.Month & "/" & dDateAndTime.Day & "/" & dDateAndTime.Year & " 23:59:59"
+                    frmMain.txtStartTime.Text = dDateAndTime.Month & "/" & dDateAndTime.Day & "/" & dDateAndTime.Year & " 00:00:00"
+                    frmMain.txtEndTime.Text = dDateAndTime.Month & "/" & dDateAndTime.Day & "/" & dDateAndTime.Year & " 23:59:59"
                     frmMain.CustomTimes()
                     frmMain.ShowEventReport()
                 End If
