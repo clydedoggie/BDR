@@ -23,8 +23,8 @@ Partial Class frmReportConfig
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim GridColumnDescriptor3 As Syncfusion.Windows.Forms.Grid.Grouping.GridColumnDescriptor = New Syncfusion.Windows.Forms.Grid.Grouping.GridColumnDescriptor()
-        Dim GridColumnDescriptor4 As Syncfusion.Windows.Forms.Grid.Grouping.GridColumnDescriptor = New Syncfusion.Windows.Forms.Grid.Grouping.GridColumnDescriptor()
+        Dim GridColumnDescriptor1 As Syncfusion.Windows.Forms.Grid.Grouping.GridColumnDescriptor = New Syncfusion.Windows.Forms.Grid.Grouping.GridColumnDescriptor()
+        Dim GridColumnDescriptor2 As Syncfusion.Windows.Forms.Grid.Grouping.GridColumnDescriptor = New Syncfusion.Windows.Forms.Grid.Grouping.GridColumnDescriptor()
         Me.TblReportTagGroupsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.cboTags = New Syncfusion.Windows.Forms.Tools.ComboBoxAdv()
         Me.BPESDataSet = New BDR.BPESDataSet()
@@ -68,13 +68,13 @@ Partial Class frmReportConfig
         '
         'cboTags
         '
-        Me.cboTags.BeforeTouchSize = New System.Drawing.Size(129, 21)
+        Me.cboTags.BeforeTouchSize = New System.Drawing.Size(222, 21)
         Me.cboTags.DataSource = Me.BPESDataSet
         Me.cboTags.DisplayMember = "TagTable.TagName"
         Me.cboTags.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboTags.Location = New System.Drawing.Point(167, 29)
+        Me.cboTags.Location = New System.Drawing.Point(50, 35)
         Me.cboTags.Name = "cboTags"
-        Me.cboTags.Size = New System.Drawing.Size(129, 21)
+        Me.cboTags.Size = New System.Drawing.Size(222, 21)
         Me.cboTags.TabIndex = 6
         Me.cboTags.ValueMember = "TagTable.TagIndex"
         '
@@ -99,7 +99,9 @@ Partial Class frmReportConfig
         'grdRC
         '
         Me.grdRC.AlphaBlendSelectionColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(120, Byte), Integer), CType(CType(215, Byte), Integer))
+        Me.grdRC.AutoPopulateRelations = False
         Me.grdRC.BackColor = System.Drawing.SystemColors.Window
+        Me.grdRC.BrowseOnly = True
         Me.grdRC.DataMember = "tblReportTagGroups"
         Me.grdRC.DataSource = Me.BPESDataSet
         Me.grdRC.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -107,26 +109,26 @@ Partial Class frmReportConfig
         Me.grdRC.MarkRowHeader = True
         Me.grdRC.Name = "grdRC"
         Me.grdRC.ShowCurrentCellBorderBehavior = Syncfusion.Windows.Forms.Grid.GridShowCurrentCellBorder.GrayWhenLostFocus
-        Me.grdRC.Size = New System.Drawing.Size(239, 501)
+        Me.grdRC.Size = New System.Drawing.Size(332, 448)
         Me.grdRC.TabIndex = 2
         Me.grdRC.TableDescriptor.AllowEdit = False
         Me.grdRC.TableDescriptor.AllowNew = False
         Me.grdRC.TableDescriptor.AllowRemove = False
-        GridColumnDescriptor3.GroupByAppearance.ColumnHeaderCell.Enabled = False
-        GridColumnDescriptor3.GroupByAppearance.ColumnHeaderCell.Interior = New Syncfusion.Drawing.BrushInfo()
-        GridColumnDescriptor3.GroupByAppearance.ColumnHeaderCell.ReadOnly = True
-        GridColumnDescriptor3.GroupByOptions.CaptionText = " {Category} "
-        GridColumnDescriptor3.GroupByOptions.IsExpandedInitialValue = True
-        GridColumnDescriptor3.GroupByOptions.ShowSummaries = False
-        GridColumnDescriptor3.HeaderText = "Group"
-        GridColumnDescriptor3.MappingName = "BRCGroupName"
-        GridColumnDescriptor3.ReadOnly = True
-        GridColumnDescriptor4.AllowGroupByColumn = False
-        GridColumnDescriptor4.HeaderText = "Tags"
-        GridColumnDescriptor4.MappingName = "TagName"
-        GridColumnDescriptor4.ReadOnly = True
-        GridColumnDescriptor4.Width = 150
-        Me.grdRC.TableDescriptor.Columns.AddRange(New Syncfusion.Windows.Forms.Grid.Grouping.GridColumnDescriptor() {GridColumnDescriptor3, GridColumnDescriptor4})
+        GridColumnDescriptor1.GroupByAppearance.ColumnHeaderCell.Enabled = False
+        GridColumnDescriptor1.GroupByAppearance.ColumnHeaderCell.Interior = New Syncfusion.Drawing.BrushInfo()
+        GridColumnDescriptor1.GroupByAppearance.ColumnHeaderCell.ReadOnly = True
+        GridColumnDescriptor1.GroupByOptions.CaptionText = " {Category} "
+        GridColumnDescriptor1.GroupByOptions.IsExpandedInitialValue = True
+        GridColumnDescriptor1.GroupByOptions.ShowSummaries = False
+        GridColumnDescriptor1.HeaderText = "Group"
+        GridColumnDescriptor1.MappingName = "BRCGroupName"
+        GridColumnDescriptor1.ReadOnly = True
+        GridColumnDescriptor2.AllowGroupByColumn = False
+        GridColumnDescriptor2.HeaderText = "Tags"
+        GridColumnDescriptor2.MappingName = "TagName"
+        GridColumnDescriptor2.ReadOnly = True
+        GridColumnDescriptor2.Width = 150
+        Me.grdRC.TableDescriptor.Columns.AddRange(New Syncfusion.Windows.Forms.Grid.Grouping.GridColumnDescriptor() {GridColumnDescriptor1, GridColumnDescriptor2})
         Me.grdRC.TableDescriptor.GroupedColumns.AddRange(New Syncfusion.Grouping.SortColumnDescriptor() {New Syncfusion.Grouping.SortColumnDescriptor("BRCGroupName", System.ComponentModel.ListSortDirection.Ascending)})
         Me.grdRC.TableDescriptor.Name = "tblReportTagGroupsDescriptor"
         Me.grdRC.TableDescriptor.PrimaryKeyColumns.AddRange(New Syncfusion.Grouping.SortColumnDescriptor() {New Syncfusion.Grouping.SortColumnDescriptor("BRCGroupID", System.ComponentModel.ListSortDirection.Ascending), New Syncfusion.Grouping.SortColumnDescriptor("TagIndex", System.ComponentModel.ListSortDirection.Ascending)})
@@ -137,6 +139,8 @@ Partial Class frmReportConfig
         Me.grdRC.TableDescriptor.TableOptions.ShowRowHeader = True
         Me.grdRC.TableDescriptor.TopLevelGroupOptions.ShowCaption = False
         Me.grdRC.TableDescriptor.VisibleColumns.AddRange(New Syncfusion.Windows.Forms.Grid.Grouping.GridVisibleColumnDescriptor() {New Syncfusion.Windows.Forms.Grid.Grouping.GridVisibleColumnDescriptor("TagName")})
+        Me.grdRC.TableOptions.AllowSortColumns = False
+        Me.grdRC.TableOptions.DefaultColumnWidth = 100
         Me.grdRC.Text = "GridGroupingControl2"
         Me.grdRC.UseRightToLeftCompatibleTextBox = True
         Me.grdRC.VersionInfo = "15.3460.0.33"
@@ -174,7 +178,7 @@ Partial Class frmReportConfig
         '
         'txtNewGrp
         '
-        Me.txtNewGrp.BeforeTouchSize = New System.Drawing.Size(239, 20)
+        Me.txtNewGrp.BeforeTouchSize = New System.Drawing.Size(222, 20)
         Me.txtNewGrp.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtNewGrp.Location = New System.Drawing.Point(10, 24)
         Me.txtNewGrp.Name = "txtNewGrp"
@@ -197,7 +201,7 @@ Partial Class frmReportConfig
         '
         Me.cmdRemoveTag.BeforeTouchSize = New System.Drawing.Size(94, 47)
         Me.cmdRemoveTag.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdRemoveTag.Location = New System.Drawing.Point(65, 78)
+        Me.cmdRemoveTag.Location = New System.Drawing.Point(50, 78)
         Me.cmdRemoveTag.Name = "cmdRemoveTag"
         Me.cmdRemoveTag.Size = New System.Drawing.Size(94, 47)
         Me.cmdRemoveTag.TabIndex = 15
@@ -206,16 +210,16 @@ Partial Class frmReportConfig
         'txtSelectedGrp
         '
         Me.txtSelectedGrp.BackColor = System.Drawing.SystemColors.Control
-        Me.txtSelectedGrp.BeforeTouchSize = New System.Drawing.Size(239, 20)
+        Me.txtSelectedGrp.BeforeTouchSize = New System.Drawing.Size(222, 20)
         Me.txtSelectedGrp.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtSelectedGrp.Enabled = False
         Me.txtSelectedGrp.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSelectedGrp.Location = New System.Drawing.Point(9, 29)
+        Me.txtSelectedGrp.Location = New System.Drawing.Point(50, 9)
         Me.txtSelectedGrp.Name = "txtSelectedGrp"
-        Me.txtSelectedGrp.Size = New System.Drawing.Size(149, 20)
+        Me.txtSelectedGrp.Size = New System.Drawing.Size(222, 20)
         Me.txtSelectedGrp.TabIndex = 16
         Me.txtSelectedGrp.Text = "selected group"
-        Me.txtSelectedGrp.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtSelectedGrp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.txtSelectedGrp.ThemeName = "Default"
         '
         'GroupBox1
@@ -224,7 +228,7 @@ Partial Class frmReportConfig
         Me.GroupBox1.Controls.Add(Me.cmdAddNewGroup)
         Me.GroupBox1.Controls.Add(Me.txtNewGrp)
         Me.GroupBox1.Controls.Add(Me.cboGroups)
-        Me.GroupBox1.Location = New System.Drawing.Point(274, 69)
+        Me.GroupBox1.Location = New System.Drawing.Point(370, 69)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(315, 122)
         Me.GroupBox1.TabIndex = 17
@@ -257,7 +261,7 @@ Partial Class frmReportConfig
         Me.GroupBox2.Controls.Add(Me.cmdRemoveTag)
         Me.GroupBox2.Controls.Add(Me.cmdAddTagToGroup)
         Me.GroupBox2.Controls.Add(Me.cboTags)
-        Me.GroupBox2.Location = New System.Drawing.Point(274, 211)
+        Me.GroupBox2.Location = New System.Drawing.Point(370, 231)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(315, 140)
         Me.GroupBox2.TabIndex = 18
@@ -267,7 +271,7 @@ Partial Class frmReportConfig
         '
         Me.cmdClose.BeforeTouchSize = New System.Drawing.Size(315, 47)
         Me.cmdClose.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdClose.Location = New System.Drawing.Point(274, 529)
+        Me.cmdClose.Location = New System.Drawing.Point(206, 529)
         Me.cmdClose.Name = "cmdClose"
         Me.cmdClose.Size = New System.Drawing.Size(315, 47)
         Me.cmdClose.TabIndex = 19
@@ -285,7 +289,7 @@ Partial Class frmReportConfig
         'TextBoxExt1
         '
         Me.TextBoxExt1.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBoxExt1.BeforeTouchSize = New System.Drawing.Size(239, 20)
+        Me.TextBoxExt1.BeforeTouchSize = New System.Drawing.Size(222, 20)
         Me.TextBoxExt1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBoxExt1.Enabled = False
         Me.TextBoxExt1.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -323,12 +327,12 @@ Partial Class frmReportConfig
         '
         'cmdActive
         '
-        Me.cmdActive.BeforeTouchSize = New System.Drawing.Size(217, 29)
+        Me.cmdActive.BeforeTouchSize = New System.Drawing.Size(252, 29)
         Me.cmdActive.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdActive.ForeColor = System.Drawing.Color.DarkGreen
-        Me.cmdActive.Location = New System.Drawing.Point(206, 40)
+        Me.cmdActive.Location = New System.Drawing.Point(254, 39)
         Me.cmdActive.Name = "cmdActive"
-        Me.cmdActive.Size = New System.Drawing.Size(217, 29)
+        Me.cmdActive.Size = New System.Drawing.Size(252, 29)
         Me.cmdActive.TabIndex = 25
         Me.cmdActive.Text = "Make Active"
         '
@@ -336,7 +340,7 @@ Partial Class frmReportConfig
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(601, 588)
+        Me.ClientSize = New System.Drawing.Size(702, 588)
         Me.ControlBox = False
         Me.Controls.Add(Me.cmdActive)
         Me.Controls.Add(Me.cmdDeleteConfig)

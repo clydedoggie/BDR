@@ -30,6 +30,7 @@ Public Class frmReportConfig
     End Sub
 
     Private Sub RefillDatasets()
+        ' Refill datasets on initial load and after add/edit/delete operations
         If Not mbStillLoading Then
             Try
                 BatchReportConfigTagsTableAdapter.Connection.ConnectionString = My.Settings.BPESCnString
@@ -42,6 +43,7 @@ Public Class frmReportConfig
                 TagTableTableAdapter.Fill(Me.BPESDataSet.TagTable)
                 taBatchReportConfigTableAdapter.Connection.ConnectionString = My.Settings.BPESCnString
                 Me.grdRC.Refresh()
+                ResetTagControls
             Catch ex As Exception
                 MsgBox("RefillDatasets: Could not connect to Data - Check Connection", vbCritical, "ERROR REPORT CONFIGURATION INFORMATION")
             End Try
@@ -49,10 +51,29 @@ Public Class frmReportConfig
     End Sub
 
     Private Sub grdRC_Click(ByVal sender As Object, ByVal e As EventArgs) Handles grdRC.TableControlCellClick
-        Dim r As Record = grdRC.Table.DisplayElements(grdRC.TableControl.CurrentCell.RowIndex).ParentRecord
-        'MsgBox("Group index:" & r.PrimaryKeys(0).ToString & " Tag index:" & r.PrimaryKeys(1).ToString)
-        txtSelectedGrp.Text = r.GetData("BRCGroupName")
-        cboTags.SelectedValue = r.PrimaryKeys(1)
+        ResetTagControls()
+    End Sub
+
+    Private Sub ResetTagControls()
+        Dim r As Record
+        Dim bTagSelected As Boolean = False
+        Dim nIndex As Long
+
+        'test to see if Group or Tag selected, if Group then clear controls
+        nIndex = grdRC.TableControl.CurrentCell.RowIndex
+        bTagSelected = (nIndex > -1 And nIndex < grdRC.Table.DisplayElements.Count)
+        If bTagSelected Then
+            r = grdRC.Table.DisplayElements(grdRC.TableControl.CurrentCell.RowIndex).ParentRecord
+            bTagSelected = Not IsNothing(r)
+        End If
+
+        If bTagSelected Then
+            txtSelectedGrp.Text = r.GetData("BRCGroupName")
+            cboTags.SelectedValue = r.PrimaryKeys(1)
+        Else
+            txtSelectedGrp.Text = ""
+            cboTags.SelectedValue = -1
+        End If
     End Sub
 
     Private Sub cmdAddNewGroup_Click(sender As Object, e As EventArgs) Handles cmdAddNewGroup.Click
@@ -123,6 +144,7 @@ Public Class frmReportConfig
         RefillDatasets()
         grdRC.TableOptions.ListBoxSelectionMode = SelectionMode.One
 
+        '' Get Active status of selected config
         If Not mbStillLoading Then
             Dim dt As BPESDataSetTableAdapters.BatchReportConfigTableAdapter = New BPESDataSetTableAdapters.BatchReportConfigTableAdapter
             dt.Connection.ConnectionString = My.Settings.BPESCnString
@@ -142,12 +164,17 @@ Public Class frmReportConfig
     End Sub
 
     Private Sub cmdDeleteConfig_Click(sender As Object, e As EventArgs) Handles cmdDeleteConfig.Click
-        If Me.cboSelectConfig.Items.Count > 1 Then
-            taBatchReportConfigTableAdapter.Delete(Me.cboSelectConfig.SelectedValue)
-            SetConfigLIst()
-            Me.cboSelectConfig.SelectedIndex = 0
+        If cmdActive.Text = "Active" Then
+            MsgBox("You cannot delete the Active configuration", vbCritical, "INVALID OPERATION")
         Else
-            MsgBox("You cannot delete the last configuration!", vbCritical, "INVALID OPERATION")
+            If Me.cboSelectConfig.Items.Count > 1 Then
+                taBatchReportConfigTableAdapter.Delete(Me.cboSelectConfig.SelectedValue)
+                SetConfigLIst()
+                Me.cboSelectConfig.SelectedIndex = 0
+                ResetForm()
+            Else
+                MsgBox("You cannot delete the last configuration!", vbCritical, "INVALID OPERATION")
+            End If
         End If
     End Sub
 
@@ -167,8 +194,9 @@ Public Class frmReportConfig
     End Sub
 
     Private Sub cmdAddConfig_Click(sender As Object, e As EventArgs) Handles cmdAddConfig.Click
+        Me.TopMost = False
         Dim sDescription As String = InputBox("Enter Description for this configuration", "DESCRIPTION REQUIRED")
-
+        Me.TopMost = True
         If Len(sDescription) = 0 Then Exit Sub
         If Len(sDescription) > 50 Then
             MsgBox("You are limited to 50 char for the description", MsgBoxStyle.Critical, "INVALID OPERATION")
@@ -178,4 +206,5 @@ Public Class frmReportConfig
         SetConfigLIst()
         ResetForm()
     End Sub
+
 End Class

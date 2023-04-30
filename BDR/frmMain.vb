@@ -40,7 +40,7 @@ Public Class frmMain
         Dim dt As BPESDataSetTableAdapters.BatchReportConfigTableAdapter = New BPESDataSetTableAdapters.BatchReportConfigTableAdapter
         dt.Connection.ConnectionString = My.Settings.BPESCnString
         Dim dr() As DataRow = dt.GetReportConfig().Select("ActiveConfig = 1")
-        txtActiveConfig.Text = dr(0)("BRCDescription")
+        If dr.Count > 0 Then txtActiveConfig.Text = dr(0)("BRCDescription")
     End Sub
 
     Private Function GetTagIndex(sTag As String) As Long
@@ -79,8 +79,6 @@ Public Class frmMain
         txtBatchID.Text = "Custom Dates"
         btnBatchRpt.Enabled = False
     End Sub
-
-
 
     Private Sub btnEventReport_Click(sender As Object, e As EventArgs) Handles btnEventReport.Click
         ShowEventReport()
