@@ -58,7 +58,7 @@ Partial Class frmReport
         Me.rvEvents.Location = New System.Drawing.Point(47, 52)
         Me.rvEvents.Name = "rvEvents"
         Me.rvEvents.ServerReport.BearerToken = Nothing
-        Me.rvEvents.Size = New System.Drawing.Size(941, 536)
+        Me.rvEvents.Size = New System.Drawing.Size(826, 707)
         Me.rvEvents.TabIndex = 0
         '
         'vwConditionEventTableAdapter
@@ -88,7 +88,7 @@ Partial Class frmReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1049, 600)
+        Me.ClientSize = New System.Drawing.Size(918, 771)
         Me.Controls.Add(Me.rvEvents)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
