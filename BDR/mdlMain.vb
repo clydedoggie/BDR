@@ -1,6 +1,6 @@
 ﻿
 Imports System.IO
-Imports Microsoft.Reporting.WinForms
+
 Module mdlMain
 
     Public Sub StartupBDR(sStartupArgs As String, bFirstInstance As Boolean)
@@ -10,7 +10,6 @@ Module mdlMain
         Dim sFolderToSaveTo As String = ""
         Dim sFileName As String = ""
         Dim dDateAndTime As DateTime = Now()
-
         ' Set time format to use in app
         If My.Settings.Use24Hr Then
             GlobalVariables.TimeFormatLong = "MM/dd/yy HH:mm:ss.f"
@@ -22,6 +21,7 @@ Module mdlMain
         ' If Auto Report is enabled then check for startup argument. If found and >0 then generate last Batch report, save to pdf, and close.
         ' If found but =0 then generate Event and Alarm report for last day.
         ' If found it should be a numeric value that indicates delay to wait until generating report (for all data to be written to db).
+
         If My.Settings.AutoReportOn Then
             If Len(sStartupArgs) > 0 Then
                 Dim sWaitSec As String = sStartupArgs
@@ -65,7 +65,6 @@ Module mdlMain
                 End If
             End If
         End If
-
     End Sub
     Public Sub ProgramPause(ByVal nSeconds As Integer)
 

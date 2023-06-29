@@ -20,6 +20,7 @@ Namespace My
         End Sub
         Public Sub Me_StartupAgain(ByVal sender As Object, ByVal e As StartupNextInstanceEventArgs) Handles Me.StartupNextInstance
             Dim sStartupArgs As String = ""
+
             If My.Application.CommandLineArgs.Count > 0 Then sStartupArgs = My.Application.CommandLineArgs(0)
             StartupBDR(sStartupArgs, False)
         End Sub
