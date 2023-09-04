@@ -653,6 +653,8 @@ Partial Public Class BPESDataSet
         
         Private columnRecipe As Global.System.Data.DataColumn
         
+        Private columnEventReportGroup As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub New()
@@ -729,6 +731,14 @@ Partial Public Class BPESDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property EventReportGroupColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnEventReportGroup
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -765,9 +775,9 @@ Partial Public Class BPESDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Overloads Function AddvwEventsWithPhAndRecRow(ByVal EventTimeStamp As Date, ByVal Message As String, ByVal Classification As String, ByVal Phase As String, ByVal Recipe As String) As vwEventsWithPhAndRecRow
+        Public Overloads Function AddvwEventsWithPhAndRecRow(ByVal EventTimeStamp As Date, ByVal Message As String, ByVal Classification As String, ByVal Phase As String, ByVal Recipe As String, ByVal EventReportGroup As String) As vwEventsWithPhAndRecRow
             Dim rowvwEventsWithPhAndRecRow As vwEventsWithPhAndRecRow = CType(Me.NewRow,vwEventsWithPhAndRecRow)
-            Dim columnValuesArray() As Object = New Object() {EventTimeStamp, Message, Classification, Phase, Recipe}
+            Dim columnValuesArray() As Object = New Object() {EventTimeStamp, Message, Classification, Phase, Recipe, EventReportGroup}
             rowvwEventsWithPhAndRecRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowvwEventsWithPhAndRecRow)
             Return rowvwEventsWithPhAndRecRow
@@ -795,6 +805,7 @@ Partial Public Class BPESDataSet
             Me.columnClassification = MyBase.Columns("Classification")
             Me.columnPhase = MyBase.Columns("Phase")
             Me.columnRecipe = MyBase.Columns("Recipe")
+            Me.columnEventReportGroup = MyBase.Columns("EventReportGroup")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -810,10 +821,14 @@ Partial Public Class BPESDataSet
             MyBase.Columns.Add(Me.columnPhase)
             Me.columnRecipe = New Global.System.Data.DataColumn("Recipe", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnRecipe)
+            Me.columnEventReportGroup = New Global.System.Data.DataColumn("EventReportGroup", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnEventReportGroup)
             Me.columnMessage.MaxLength = 512
             Me.columnClassification.MaxLength = 50
             Me.columnPhase.MaxLength = 50
             Me.columnRecipe.MaxLength = 50
+            Me.columnEventReportGroup.AllowDBNull = false
+            Me.columnEventReportGroup.MaxLength = 50
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -4000,6 +4015,17 @@ Partial Public Class BPESDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property EventReportGroup() As String
+            Get
+                Return CType(Me(Me.tablevwEventsWithPhAndRec.EventReportGroupColumn),String)
+            End Get
+            Set
+                Me(Me.tablevwEventsWithPhAndRec.EventReportGroupColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsEventTimeStampNull() As Boolean
             Return Me.IsNull(Me.tablevwEventsWithPhAndRec.EventTimeStampColumn)
         End Function
@@ -5413,6 +5439,7 @@ Namespace BPESDataSetTableAdapters
             tableMapping.ColumnMappings.Add("Classification", "Classification")
             tableMapping.ColumnMappings.Add("Phase", "Phase")
             tableMapping.ColumnMappings.Add("Recipe", "Recipe")
+            tableMapping.ColumnMappings.Add("EventReportGroup", "EventReportGroup")
             Me._adapter.TableMappings.Add(tableMapping)
         End Sub
         
@@ -5426,15 +5453,23 @@ Namespace BPESDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(1) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT        EventTimeStamp, Msg AS Message, Classification, Phase, Recipe"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM"& _ 
-                "            BDR.vwEventsWithPhAndRec"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (EventTimeStamp BETWEEN @Star"& _ 
-                "tTime AND @EndTime)"
+            Me._commandCollection(0).CommandText = "SELECT        EventTimeStamp, Msg AS Message, Classification, EventReportGroup, P"& _ 
+                "hase, Recipe"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            BDR.vwEventsWithPhAndRec"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (EventTimeS"& _ 
+                "tamp BETWEEN @StartTime AND @EndTime)"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(0).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@StartTime", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "EventTimeStamp", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(0).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EndTime", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "EventTimeStamp", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(1).Connection = Me.Connection
+            Me._commandCollection(1).CommandText = "SELECT        EventTimeStamp, Msg AS Message, Classification, EventReportGroup, P"& _ 
+                "hase, Recipe"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            BDR.vwEventsWithPhAndRec"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (EventTimeS"& _ 
+                "tamp BETWEEN @StartTime AND @EndTime)"
+            Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@StartTime", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "EventTimeStamp", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EndTime", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "EventTimeStamp", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -5479,6 +5514,29 @@ Namespace BPESDataSetTableAdapters
             Dim dataTable As BPESDataSet.vwEventsWithPhAndRecDataTable = New BPESDataSet.vwEventsWithPhAndRecDataTable()
             Me.Adapter.Fill(dataTable)
             Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillBy(ByVal dataTable As BPESDataSet.vwEventsWithPhAndRecDataTable, ByVal StartTime As Global.System.Nullable(Of Date), ByVal EndTime As Global.System.Nullable(Of Date)) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(1)
+            If (StartTime.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(0).Value = CType(StartTime.Value,Date)
+            Else
+                Me.Adapter.SelectCommand.Parameters(0).Value = Global.System.DBNull.Value
+            End If
+            If (EndTime.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(EndTime.Value,Date)
+            Else
+                Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
         End Function
     End Class
     
@@ -6190,8 +6248,9 @@ Namespace BPESDataSetTableAdapters
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.StoredProcedure
             Me._commandCollection(0).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("BatchID", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(0).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("Period", Global.System.Data.SqlDbType.SmallInt, 0, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(0).CommandTimeout = 120
         End Sub
-        
+
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
@@ -6199,9 +6258,10 @@ Namespace BPESDataSetTableAdapters
         Public Overloads Overridable Function GetBatchAnalogData(ByVal dataTable As BPESDataSet.uspBatchAnalogDataByGroupDataTable, ByVal BatchID As Integer, ByVal Period As Short) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
             Me.Adapter.SelectCommand.Parameters(0).Value = CType(BatchID,Integer)
-            Me.Adapter.SelectCommand.Parameters(1).Value = CType(Period,Short)
-            If (Me.ClearBeforeFill = true) Then
-                dataTable.Clear
+            Me.Adapter.SelectCommand.Parameters(1).Value = CType(Period, Short)
+            'Clear method was timing out if no records in table so added check for records, only need to clear if filled
+            If (Me.ClearBeforeFill = True) And dataTable.Rows.Count > 0 Then
+                dataTable.Clear()
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
             Return returnValue

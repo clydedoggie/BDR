@@ -8,11 +8,18 @@ Public Class frmReport
     Private Sub frmReport_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         'set up data sources, used depending on which report is being generated
-        vwConditionEventTableAdapter.Connection.ConnectionString = My.Settings.BPESCnString
+        If Not vwConditionEventTableAdapter.Connection.ConnectionString = My.Settings.BPESCnString Then
+            vwConditionEventTableAdapter.Connection.ConnectionString = My.Settings.BPESCnString
+        End If
         vwConditionEventTableAdapter.Fill(BPESDataSet.vwEventsWithPhAndRec, gdStartTime, DateAdd(DateInterval.Second, 1, gdEndTime))
-        UspBatchAnalogDataByGroupTableAdapter.Connection.ConnectionString = My.Settings.BPESCnString
+        If Not UspBatchAnalogDataByGroupTableAdapter.Connection.ConnectionString = My.Settings.BPESCnString Then
+            UspBatchAnalogDataByGroupTableAdapter.Connection.ConnectionString = My.Settings.BPESCnString
+        End If
+
         UspBatchAnalogDataByGroupTableAdapter.GetBatchAnalogData(BPESDataSet.uspBatchAnalogDataByGroup, frmMain.BatchID, frmMain.Period)
-        UspBatchWithPhasesTableAdapter.Connection.ConnectionString = My.Settings.BPESCnString
+        If Not UspBatchWithPhasesTableAdapter.Connection.ConnectionString = My.Settings.BPESCnString Then
+            UspBatchWithPhasesTableAdapter.Connection.ConnectionString = My.Settings.BPESCnString
+        End If
         UspBatchWithPhasesTableAdapter.GetBatchWithPhases(BPESDataSet.uspBatchWithPhases, frmMain.BatchID)
 
         rvEvents.LocalReport.DataSources.Clear()
@@ -41,4 +48,12 @@ Public Class frmReport
 
     End Sub
 
+    Private Sub FillByToolStripButton_Click(sender As Object, e As EventArgs) Handles FillByToolStripButton.Click
+        Try
+            Me.vwConditionEventTableAdapter.FillBy(Me.BPESDataSet.vwEventsWithPhAndRec, New System.Nullable(Of Date)(CType(StartTimeToolStripTextBox.Text, Date)), New System.Nullable(Of Date)(CType(EndTimeToolStripTextBox.Text, Date)))
+        Catch ex As System.Exception
+            System.Windows.Forms.MessageBox.Show(ex.Message)
+        End Try
+
+    End Sub
 End Class

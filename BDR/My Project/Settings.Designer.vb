@@ -94,7 +94,7 @@ Namespace My
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
          Global.System.Configuration.DefaultSettingValueAttribute("Data Source=.\SqlExpress;Initial Catalog=BPES;Integrated Security=True;Connect Ti"& _ 
-            "meout=60")>  _
+            "meout=120")>  _
         Public ReadOnly Property BPESConnectionString() As String
             Get
                 Return CType(Me("BPESConnectionString"),String)
@@ -104,7 +104,7 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("Data Source=.\SqlExpress;Initial Catalog=BPES;Integrated Security=True;Connect Ti"& _ 
-            "meout=60")>  _
+            "meout=120")>  _
         Public Property BPESCnString() As String
             Get
                 Return CType(Me("BPESCnString"),String)

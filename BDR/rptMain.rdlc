@@ -37,6 +37,10 @@
           <DataField>Recipe</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="EventReportGroup">
+          <DataField>EventReportGroup</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>BPESDataSet</rd:DataSetName>
@@ -325,8 +329,8 @@
             <DataSetName>dsEvents</DataSetName>
             <Filters>
               <Filter>
-                <FilterExpression>=IIf(Parameters!ShowEvents.Value,Left(Fields!Classification.Value,5)="Event" xor Fields!Classification.Value="Manual",1=2) Xor 
-IIf(Parameters!ShowAlarms.Value,Fields!Classification.Value="Alarm" xor Fields!Classification.Value="Warning",1=2)</FilterExpression>
+                <FilterExpression>=IIf(Parameters!ShowEvents.Value,Left(Fields!EventReportGroup.Value,5)="Event" ,1=2) Xor 
+IIf(Parameters!ShowAlarms.Value,Fields!EventReportGroup.Value="Alarm" ,1=2)</FilterExpression>
                 <Operator>Equal</Operator>
                 <FilterValues>
                   <FilterValue DataType="Boolean">true</FilterValue>
