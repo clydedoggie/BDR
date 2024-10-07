@@ -48,12 +48,4 @@ Public Class frmReport
 
     End Sub
 
-    Private Sub FillByToolStripButton_Click(sender As Object, e As EventArgs) Handles FillByToolStripButton.Click
-        Try
-            Me.vwConditionEventTableAdapter.FillBy(Me.BPESDataSet.vwEventsWithPhAndRec, New System.Nullable(Of Date)(CType(StartTimeToolStripTextBox.Text, Date)), New System.Nullable(Of Date)(CType(EndTimeToolStripTextBox.Text, Date)))
-        Catch ex As System.Exception
-            System.Windows.Forms.MessageBox.Show(ex.Message)
-        End Try
-
-    End Sub
 End Class
